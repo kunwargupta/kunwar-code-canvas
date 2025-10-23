@@ -1,55 +1,85 @@
-import { Link, useLocation } from "react-router-dom";
+import { useState, useEffect } from "react";
 import { Home, User, Briefcase, Award, FileText, Mail } from "lucide-react";
 
 const navItems = [
-  { path: "/", label: "Home", icon: Home },
-  { path: "/about", label: "About", icon: User },
-  { path: "/projects", label: "Projects", icon: Briefcase },
-  { path: "/skills", label: "Skills", icon: Award },
-  { path: "/resume", label: "Resume", icon: FileText },
-  { path: "/contact", label: "Contact", icon: Mail },
+  { id: "home", label: "Home", icon: Home },
+  { id: "about", label: "About", icon: User },
+  { id: "projects", label: "Projects", icon: Briefcase },
+  { id: "skills", label: "Skills", icon: Award },
+  { id: "resume", label: "Resume", icon: FileText },
+  { id: "contact", label: "Contact", icon: Mail },
 ];
 
 export const Navigation = () => {
-  const location = useLocation();
+  const [activeSection, setActiveSection] = useState("home");
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setActiveSection(entry.target.id);
+          }
+        });
+      },
+      { threshold: 0.3 }
+    );
+
+    navItems.forEach(({ id }) => {
+      const element = document.getElementById(id);
+      if (element) observer.observe(element);
+    });
+
+    return () => observer.disconnect();
+  }, []);
+
+  const scrollToSection = (id: string) => {
+    const element = document.getElementById(id);
+    if (element) {
+      element.scrollIntoView({ behavior: "smooth" });
+    }
+  };
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 bg-card/80 backdrop-blur-lg border-b border-border">
+    <nav className="fixed top-0 left-0 right-0 z-50 bg-card/95 backdrop-blur-lg border-b border-border transition-all duration-300">
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-16">
-          <Link to="/" className="text-xl font-bold text-gradient">
+          <button
+            onClick={() => scrollToSection("home")}
+            className="text-xl font-bold text-gradient hover:scale-110 transition-transform duration-300"
+          >
             KG
-          </Link>
+          </button>
           
           <div className="hidden md:flex items-center gap-8">
-            {navItems.map(({ path, label }) => (
-              <Link
-                key={path}
-                to={path}
-                className={`text-sm font-medium transition-colors hover:text-primary ${
-                  location.pathname === path
+            {navItems.map(({ id, label }) => (
+              <button
+                key={id}
+                onClick={() => scrollToSection(id)}
+                className={`text-sm font-medium transition-all duration-300 hover:text-primary hover:scale-110 ${
+                  activeSection === id
                     ? "text-primary"
                     : "text-muted-foreground"
                 }`}
               >
                 {label}
-              </Link>
+              </button>
             ))}
           </div>
 
           <div className="md:hidden flex items-center gap-4">
-            {navItems.map(({ path, icon: Icon }) => (
-              <Link
-                key={path}
-                to={path}
-                className={`transition-colors ${
-                  location.pathname === path
+            {navItems.map(({ id, icon: Icon }) => (
+              <button
+                key={id}
+                onClick={() => scrollToSection(id)}
+                className={`transition-all duration-300 hover:scale-125 ${
+                  activeSection === id
                     ? "text-primary"
                     : "text-muted-foreground hover:text-primary"
                 }`}
               >
                 <Icon size={20} />
-              </Link>
+              </button>
             ))}
           </div>
         </div>
