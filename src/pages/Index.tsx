@@ -107,7 +107,7 @@ const Index = () => {
     message: "",
   });
   const { toast } = useToast();
-  const { ref: aboutCardRef, transform: aboutCardTransform } = useTilt();
+  const { ref: aboutCardRef, transform: aboutCardTransform, isHovered: aboutCardHovered } = useTilt();
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -209,8 +209,13 @@ const Index = () => {
 
             <Card 
               ref={aboutCardRef}
-              className="p-8 md:p-12 card-hover transition-transform duration-200 ease-out"
-              style={{ transform: aboutCardTransform }}
+              className="p-8 md:p-12 tilt-card"
+              style={{ 
+                transform: aboutCardTransform,
+                boxShadow: aboutCardHovered 
+                  ? '0 35px 70px -15px rgba(66, 153, 225, 0.5), 0 20px 40px -10px rgba(0, 0, 0, 0.3)'
+                  : '0 10px 30px -5px rgba(0, 0, 0, 0.2)'
+              }}
             >
               <div className="grid md:grid-cols-[200px,1fr] gap-8 items-start">
                 <div className="mx-auto md:mx-0">
@@ -271,7 +276,7 @@ const Index = () => {
       {/* Projects Section */}
       <section id="projects" className="min-h-screen flex items-center justify-center px-4 py-24">
         <div className="container mx-auto">
-          <div className="max-w-6xl mx-auto space-y-12">
+          <div className="max-w-4xl mx-auto space-y-12">
             <div className="text-center space-y-4 animate-fade-in">
               <h1 className="text-4xl md:text-5xl font-bold">
                 My <span className="text-gradient">Projects</span>
@@ -281,16 +286,20 @@ const Index = () => {
               </p>
             </div>
 
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div className="relative space-y-6">
               {projects.map((project, index) => (
                 <Card
                   key={index}
-                  className="p-6 card-hover flex flex-col animate-slide-up"
-                  style={{ animationDelay: `${index * 0.1}s` }}
+                  className="p-8 flex flex-col animate-slide-up sticky top-24 backdrop-blur-sm"
+                  style={{ 
+                    animationDelay: `${index * 0.1}s`,
+                    top: `${100 + index * 20}px`,
+                    zIndex: projects.length - index
+                  }}
                 >
                   <div className="flex-1 space-y-4">
-                    <h3 className="text-xl font-semibold">{project.title}</h3>
-                    <p className="text-muted-foreground text-sm leading-relaxed">
+                    <h3 className="text-2xl font-semibold">{project.title}</h3>
+                    <p className="text-muted-foreground leading-relaxed">
                       {project.description}
                     </p>
                     <div className="flex flex-wrap gap-2">
@@ -302,14 +311,14 @@ const Index = () => {
                     </div>
                   </div>
                   
-                  <div className="flex gap-3 mt-6 pt-4 border-t border-border">
+                  <div className="flex gap-3 mt-6 pt-6 border-t border-border">
                     <a 
                       href={project.github} 
                       target="_blank" 
                       rel="noopener noreferrer"
                       className="flex-1"
                     >
-                      <Button variant="outline" size="sm" className="w-full gap-2">
+                      <Button variant="outline" size="lg" className="w-full gap-2 hover:scale-105 transition-transform">
                         <Github size={16} />
                         Code
                       </Button>
@@ -321,7 +330,7 @@ const Index = () => {
                         rel="noopener noreferrer"
                         className="flex-1"
                       >
-                        <Button size="sm" className="w-full gap-2 glow-effect">
+                        <Button size="lg" className="w-full gap-2 glow-effect hover:scale-105 transition-transform">
                           <ExternalLink size={16} />
                           Demo
                         </Button>
@@ -361,11 +370,11 @@ const Index = () => {
                     style={{ animationDelay: `${index * 0.1}s` }}
                   >
                     <div className={`w-full md:w-1/2 ${index % 2 === 0 ? "md:pr-8" : "md:pl-8"}`}>
-                      <Card className="p-6 card-hover">
+                      <Card className="p-6 water-fill group cursor-pointer border-primary/20 hover:border-primary/50 transition-all duration-300">
                         <div className="space-y-4">
                           <div className="flex items-start justify-between gap-4">
                             <div>
-                              <h3 className="text-xl font-semibold mb-1">
+                              <h3 className="text-xl font-semibold mb-1 text-primary">
                                 {skill.category}
                               </h3>
                               <p className="text-sm text-muted-foreground">
@@ -374,8 +383,8 @@ const Index = () => {
                             </div>
                             <Dialog>
                               <DialogTrigger asChild>
-                                <Button size="sm" variant="ghost" className="gap-2 glow-effect">
-                                  <Award size={16} />
+                                <Button size="sm" variant="ghost" className="gap-2 glow-effect hover:bg-primary/10">
+                                  <Award size={16} className="text-primary" />
                                 </Button>
                               </DialogTrigger>
                               <DialogContent>
@@ -406,7 +415,7 @@ const Index = () => {
                           
                           <div className="flex flex-wrap gap-2">
                             {skill.items.map((item, i) => (
-                              <Badge key={i} variant="secondary">
+                              <Badge key={i} className="bg-primary/10 text-primary border-primary/20 hover:bg-primary/20 transition-colors">
                                 {item}
                               </Badge>
                             ))}
@@ -415,7 +424,7 @@ const Index = () => {
                       </Card>
                     </div>
 
-                    <div className="absolute left-0 md:left-1/2 transform md:-translate-x-1/2 w-4 h-4 rounded-full bg-primary border-4 border-background" />
+                    <div className="absolute left-0 md:left-1/2 transform md:-translate-x-1/2 w-4 h-4 rounded-full bg-primary border-4 border-background shadow-lg shadow-primary/50 animate-pulse" />
                   </div>
                 ))}
               </div>

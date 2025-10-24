@@ -3,6 +3,7 @@ import { useEffect, useRef, useState } from "react";
 export const useTilt = () => {
   const ref = useRef<HTMLDivElement>(null);
   const [transform, setTransform] = useState("");
+  const [isHovered, setIsHovered] = useState(false);
 
   useEffect(() => {
     const element = ref.current;
@@ -16,26 +17,33 @@ export const useTilt = () => {
       const centerX = rect.width / 2;
       const centerY = rect.height / 2;
 
-      const rotateX = ((y - centerY) / centerY) * -10;
-      const rotateY = ((x - centerX) / centerX) * 10;
+      const rotateX = ((y - centerY) / centerY) * -8;
+      const rotateY = ((x - centerX) / centerX) * 8;
 
       setTransform(
-        `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.02, 1.02, 1.02)`
+        `perspective(1200px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.03, 1.03, 1.03)`
       );
     };
 
+    const handleMouseEnter = () => {
+      setIsHovered(true);
+    };
+
     const handleMouseLeave = () => {
+      setIsHovered(false);
       setTransform("");
     };
 
     element.addEventListener("mousemove", handleMouseMove);
+    element.addEventListener("mouseenter", handleMouseEnter);
     element.addEventListener("mouseleave", handleMouseLeave);
 
     return () => {
       element.removeEventListener("mousemove", handleMouseMove);
+      element.removeEventListener("mouseenter", handleMouseEnter);
       element.removeEventListener("mouseleave", handleMouseLeave);
     };
   }, []);
 
-  return { ref, transform };
+  return { ref, transform, isHovered };
 };
