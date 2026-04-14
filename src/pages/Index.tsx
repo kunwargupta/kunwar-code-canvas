@@ -1,5 +1,4 @@
 import { TypeWriter } from "@/components/TypeWriter";
-import { SnakeAnimation } from "@/components/SnakeAnimation";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -13,90 +12,64 @@ import { useTilt } from "@/hooks/use-tilt";
 
 const projects = [
   {
-    title: "Sales Dashboard Analytics",
-    description: "Interactive dashboard for analyzing sales trends, customer behavior, and revenue metrics using Python and Tableau.",
-    tech: ["Python", "Pandas", "Tableau", "SQL"],
-    github: "https://github.com",
-    demo: "https://demo.com",
+    title: "Pizza Sales Campaign & Business Analytics",
+    description: "Queried 48,000+ transactional records using 15+ advanced SQL queries (JOINs, CTEs, window functions) to deliver business performance metrics – revenue, order volume, and peak demand by hour and category.",
+    tech: ["SQL", "MySQL"],
+    github: "https://github.com/kunwargupta/pizza_sales-mysql",
   },
   {
-    title: "Customer Segmentation Model",
-    description: "Machine learning project to segment customers based on purchasing patterns and demographics.",
-    tech: ["Python", "Scikit-learn", "Jupyter", "Matplotlib"],
-    github: "https://github.com",
-    demo: "https://demo.com",
+    title: "Real Estate Insight Tableau Dashboard",
+    description: "Interactive Tableau dashboard for analyzing real estate market trends, property valuations, and geographic insights to support data-driven decision making in the housing market.",
+    tech: ["Tableau", "Data Visualization", "Analytics"],
+    github: "https://github.com/kunwargupta/Real_Estate_Insight_Tableau_Dashboard",
   },
   {
-    title: "E-commerce Data Pipeline",
-    description: "Automated ETL pipeline for processing e-commerce data from multiple sources into a centralized database.",
-    tech: ["Python", "PostgreSQL", "Apache Airflow", "Docker"],
-    github: "https://github.com",
-    demo: null,
+    title: "Student Social Media Addiction Analysis",
+    description: "Power BI project analyzing student social media usage patterns, addiction indicators, and their impact on academic performance through interactive dashboards and visual analytics.",
+    tech: ["Power BI", "Data Analysis", "Visualization"],
+    github: "https://github.com/kunwargupta/Student-Social-Media-Addiction-PowerBI-Project",
   },
   {
-    title: "Sentiment Analysis Tool",
-    description: "NLP-based tool to analyze customer reviews and extract sentiment insights for product improvement.",
-    tech: ["Python", "NLTK", "Streamlit", "AWS"],
-    github: "https://github.com",
-    demo: "https://demo.com",
+    title: "US Customer Insights Analysis",
+    description: "Comprehensive analysis of US customer data to uncover purchasing patterns, demographic trends, and behavioral insights for strategic business recommendations.",
+    tech: ["Python", "Pandas", "Data Analysis"],
+    github: "https://github.com/kunwargupta/US-Customer-Insights-Analysis",
   },
   {
-    title: "Financial Portfolio Tracker",
-    description: "Real-time portfolio tracking application with performance analytics and risk assessment features.",
-    tech: ["React", "TypeScript", "D3.js", "Firebase"],
-    github: "https://github.com",
-    demo: "https://demo.com",
-  },
-  {
-    title: "Healthcare Data Visualization",
-    description: "Comprehensive visualization suite for healthcare metrics, patient outcomes, and operational efficiency.",
-    tech: ["R", "Shiny", "ggplot2", "MySQL"],
-    github: "https://github.com",
-    demo: "https://demo.com",
+    title: "Customer Churn Analysis",
+    description: "Cleaned and standardized 7,043 customer records across 21 variables, identifying a 26.5% churn rate and 3 key behavioural drivers – contract type and tenure as primary risk indicators.",
+    tech: ["Python", "Pandas", "Matplotlib", "Seaborn"],
+    github: "https://github.com/kunwargupta/Customer-Churn-Analysis",
   },
 ];
 
 const skills = [
   {
-    category: "Programming Languages",
-    items: ["Python", "R", "SQL", "JavaScript", "TypeScript"],
-    date: "2022 - Present",
-    certificate: "Python for Data Science - Coursera",
+    category: "Languages & Querying",
+    items: ["Python", "Pandas", "NumPy", "Matplotlib", "Seaborn", "SQL", "MySQL"],
+    date: "2024 - Present",
+    certificate: "Data Analyst Certification - Career247",
     certificateUrl: "#",
   },
   {
-    category: "Data Analysis",
-    items: ["Pandas", "NumPy", "Excel", "Statistical Analysis"],
-    date: "2022 - Present",
-    certificate: "Data Analysis with Python - freeCodeCamp",
+    category: "BI & Visualization",
+    items: ["Power BI", "Tableau", "Excel", "Pivot Tables", "Power Query", "VLOOKUP", "Google Sheets"],
+    date: "2024 - Present",
+    certificate: "Advanced Excel - Simplilearn SkillUp",
     certificateUrl: "#",
   },
   {
-    category: "Data Visualization",
-    items: ["Tableau", "Power BI", "Matplotlib", "Seaborn", "D3.js"],
-    date: "2023 - Present",
-    certificate: "Tableau Desktop Specialist",
+    category: "Analytics",
+    items: ["EDA", "Data Cleaning", "Data Validation", "KPI Reporting", "Customer Segmentation", "Statistical Analysis"],
+    date: "2025 - Present",
+    certificate: "5-Star Gold SQL Badge - HackerRank",
     certificateUrl: "#",
   },
   {
-    category: "Database Management",
-    items: ["PostgreSQL", "MySQL", "MongoDB", "SQLite"],
-    date: "2022 - Present",
-    certificate: "SQL for Data Science - Coursera",
-    certificateUrl: "#",
-  },
-  {
-    category: "Machine Learning",
-    items: ["Scikit-learn", "TensorFlow", "Keras", "Feature Engineering"],
-    date: "2023 - Present",
-    certificate: "Machine Learning Specialization - Andrew Ng",
-    certificateUrl: "#",
-  },
-  {
-    category: "Tools & Technologies",
-    items: ["Git", "Docker", "Jupyter", "VS Code", "AWS"],
-    date: "2022 - Present",
-    certificate: "AWS Cloud Practitioner",
+    category: "Workflow & Tools",
+    items: ["Git", "Data Quality Checks", "Documentation", "AI-Assisted Analytics", "Cross-Functional Collaboration"],
+    date: "2025 - Present",
+    certificate: "Data Analyst Certification - Career247",
     certificateUrl: "#",
   },
 ];
@@ -131,7 +104,7 @@ const Index = () => {
         <div className="max-w-4xl mx-auto text-center space-y-8 animate-fade-in">
           <div className="space-y-4">
             <h1 className="text-5xl md:text-7xl font-bold tracking-tight">
-              Hi, I'm <span className="text-gradient relative inline-block">Kunwar Gupta<SnakeAnimation /></span>
+              Hi, I'm <span className="text-gradient">Kunwar Gupta</span>
             </h1>
             
             <div className="text-xl md:text-2xl text-muted-foreground h-8">
@@ -147,7 +120,7 @@ const Index = () => {
           </div>
 
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            Passionate about turning data into insights and building solutions that make a difference.
+            Data Analyst with hands-on experience in SQL, Python, Power BI, and Excel, focused on data validation, EDA, and KPI reporting.
           </p>
 
           <div className="flex flex-wrap gap-4 justify-center items-center">
@@ -178,7 +151,7 @@ const Index = () => {
               <Github size={24} />
             </a>
             <a 
-              href="https://linkedin.com/in/kunwargupta" 
+              href="https://www.linkedin.com/in/kunwarjigupta/" 
               target="_blank" 
               rel="noopener noreferrer"
               className="text-muted-foreground hover:text-primary transition-colors glow-effect"
@@ -186,7 +159,7 @@ const Index = () => {
               <Linkedin size={24} />
             </a>
             <a 
-              href="mailto:kunwar@example.com"
+              href="mailto:Kunwargupta7@gmail.com"
               className="text-muted-foreground hover:text-primary transition-colors glow-effect"
             >
               <Mail size={24} />
@@ -229,16 +202,16 @@ const Index = () => {
                   <div className="space-y-4">
                     <h2 className="text-2xl font-semibold">Kunwar Gupta</h2>
                     <p className="text-muted-foreground leading-relaxed">
-                      I'm an aspiring data analyst with a passion for uncovering insights from data 
-                      and creating meaningful visualizations. My journey in tech began with a curiosity 
-                      about how data shapes decisions, and it has evolved into a dedication to mastering 
-                      tools like Python, SQL, and various data visualization platforms.
+                      Data Analyst with hands-on experience in SQL, Python, Power BI, and Excel, focused on 
+                      data validation, exploratory data analysis (EDA), and KPI reporting across datasets of 
+                      48,000+ records. Skilled in data cleaning, preparation, and customer segmentation, with 
+                      experience building dashboards and reports that communicate findings clearly to non-technical 
+                      stakeholders. Currently interning at Convergence Inc., working on data quality metrics 
+                      and coverage reporting.
                     </p>
                     <p className="text-muted-foreground leading-relaxed">
-                      When I'm not analyzing datasets or building dashboards, you can find me learning 
-                      new technologies, working on personal projects, or exploring ways to apply data 
-                      science to real-world problems. I believe in continuous learning and always strive 
-                      to improve my skills.
+                      Committed to delivering accurate, analysis-ready data and actionable insights that 
+                      support business decisions. B.Sc. graduate from S.M.D. Patel Mahavidyalaya, Lucknow, UP, India.
                     </p>
                   </div>
 
@@ -254,9 +227,9 @@ const Index = () => {
 
             <div className="grid md:grid-cols-3 gap-6">
               {[
-                { label: "Projects", value: "10+" },
-                { label: "Skills", value: "15+" },
-                { label: "Certificates", value: "5+" },
+                { label: "Projects", value: "5+" },
+                { label: "Skills", value: "20+" },
+                { label: "Certificates", value: "3+" },
               ].map((stat, index) => (
                 <Card 
                   key={index} 
@@ -283,7 +256,7 @@ const Index = () => {
                 My <span className="text-gradient">Projects</span>
               </h1>
               <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
-                A collection of projects showcasing my skills in data analysis, visualization, and software development
+                Real-world data analysis projects showcasing SQL, Python, Power BI, and Tableau
               </p>
             </div>
 
@@ -321,22 +294,9 @@ const Index = () => {
                     >
                       <Button variant="outline" size="lg" className="w-full gap-2 hover:scale-105 transition-transform">
                         <Github size={16} />
-                        Code
+                        View on GitHub
                       </Button>
                     </a>
-                    {project.demo && (
-                      <a 
-                        href={project.demo} 
-                        target="_blank" 
-                        rel="noopener noreferrer"
-                        className="flex-1"
-                      >
-                        <Button size="lg" className="w-full gap-2 glow-effect hover:scale-105 transition-transform">
-                          <ExternalLink size={16} />
-                          Demo
-                        </Button>
-                      </a>
-                    )}
                   </div>
                 </Card>
               ))}
@@ -453,8 +413,8 @@ const Index = () => {
                   <div className="flex items-center gap-3">
                     <FileText size={24} className="text-primary" />
                     <div>
-                      <h3 className="font-semibold">Kunwar_Gupta_Resume.pdf</h3>
-                      <p className="text-sm text-muted-foreground">Last updated: January 2025</p>
+                      <h3 className="font-semibold">Kunwar_Data_Analyst.pdf</h3>
+                      <p className="text-sm text-muted-foreground">Last updated: April 2026</p>
                     </div>
                   </div>
                   <Button className="gap-2 glow-effect">
@@ -559,10 +519,10 @@ const Index = () => {
                       <div>
                         <p className="text-sm text-muted-foreground">Email</p>
                         <a 
-                          href="mailto:kunwar@example.com" 
+                          href="mailto:Kunwargupta7@gmail.com" 
                           className="hover:text-primary transition-colors"
                         >
-                          kunwar@example.com
+                          Kunwargupta7@gmail.com
                         </a>
                       </div>
                     </div>
@@ -572,10 +532,10 @@ const Index = () => {
                       <div>
                         <p className="text-sm text-muted-foreground">Phone</p>
                         <a 
-                          href="tel:+1234567890" 
+                          href="tel:+919569292080" 
                           className="hover:text-primary transition-colors"
                         >
-                          +1 (234) 567-890
+                          +91-9569292080
                         </a>
                       </div>
                     </div>
@@ -584,7 +544,7 @@ const Index = () => {
                       <MapPin size={20} className="text-primary" />
                       <div>
                         <p className="text-sm text-muted-foreground">Location</p>
-                        <p>India</p>
+                        <p>Lucknow, UP, India</p>
                       </div>
                     </div>
                   </div>
@@ -607,7 +567,7 @@ const Index = () => {
                     </a>
 
                     <a
-                      href="https://linkedin.com/in/kunwargupta"
+                      href="https://www.linkedin.com/in/kunwarjigupta/"
                       target="_blank"
                       rel="noopener noreferrer"
                       className="flex items-center gap-3 p-3 rounded-lg hover:bg-muted transition-colors group"
@@ -615,7 +575,7 @@ const Index = () => {
                       <Linkedin size={24} className="text-muted-foreground group-hover:text-primary transition-colors" />
                       <div>
                         <p className="font-medium">LinkedIn</p>
-                        <p className="text-sm text-muted-foreground">Kunwar Gupta</p>
+                        <p className="text-sm text-muted-foreground">Kunwar Ji Gupta</p>
                       </div>
                     </a>
                   </div>
