@@ -5,7 +5,7 @@ import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
-import { ArrowRight, Github, Linkedin, Mail, Download, User, ExternalLink, Award, FileText, MapPin, Phone } from "lucide-react";
+import { ArrowRight, Github, Linkedin, Mail, Download, User, ExternalLink, Award, FileText, MapPin, Phone, Calendar } from "lucide-react";
 import { useState } from "react";
 import { useToast } from "@/hooks/use-toast";
 import { useTilt } from "@/hooks/use-tilt";
@@ -62,7 +62,7 @@ const skills = [
     category: "Analytics",
     items: ["EDA", "Data Cleaning", "Data Validation", "KPI Reporting", "Customer Segmentation", "Statistical Analysis"],
     date: "2025 - Present",
-    certificate: "5-Star Gold SQL Badge - HackerRank",
+    certificate: "SQL Intermediate Certificate - HackerRank",
     certificateUrl: "#",
   },
   {
@@ -71,6 +71,30 @@ const skills = [
     date: "2025 - Present",
     certificate: "Data Analyst Certification - Career247",
     certificateUrl: "#",
+  },
+];
+
+const certifications = [
+  {
+    title: "Data Analyst Certification",
+    issuer: "Career247",
+    date: "2026",
+    description: "120+ hours of training in Excel, SQL, Python (Pandas, NumPy), Statistics, and Power BI Dashboarding.",
+    skills: ["Excel", "SQL", "Python", "Statistics", "Power BI"],
+  },
+  {
+    title: "Advanced Excel",
+    issuer: "Simplilearn SkillUp",
+    date: "2025",
+    description: "Trained in 25+ Excel functions including Pivot Tables, VLOOKUP, and INDEX-MATCH for data analysis.",
+    skills: ["Pivot Tables", "VLOOKUP", "INDEX-MATCH", "Data Analysis"],
+  },
+  {
+    title: "SQL Intermediate Certificate",
+    issuer: "HackerRank",
+    date: "March 2025",
+    description: "Demonstrated proficiency in Joins, Aggregations, and Subqueries through structured SQL challenges.",
+    skills: ["SQL", "Joins", "Aggregations", "Subqueries"],
   },
 ];
 
@@ -104,7 +128,7 @@ const Index = () => {
         <div className="max-w-4xl mx-auto text-center space-y-8 animate-fade-in">
           <div className="space-y-4">
             <h1 className="text-5xl md:text-7xl font-bold tracking-tight">
-              Hi, I'm <span className="text-gradient">Kunwar Gupta</span>
+              Hi, I'm <span className="text-gradient">Kunwar Ji Gupta</span>
             </h1>
             
             <div className="text-xl md:text-2xl text-muted-foreground h-8">
@@ -200,7 +224,7 @@ const Index = () => {
 
                 <div className="space-y-6">
                   <div className="space-y-4">
-                    <h2 className="text-2xl font-semibold">Kunwar Gupta</h2>
+                    <h2 className="text-2xl font-semibold">Kunwar Ji Gupta</h2>
                     <p className="text-muted-foreground leading-relaxed">
                       Data Analyst with hands-on experience in SQL, Python, Power BI, and Excel, focused on 
                       data validation, exploratory data analysis (EDA), and KPI reporting across datasets of 
@@ -216,10 +240,12 @@ const Index = () => {
                   </div>
 
                   <div className="pt-4">
-                    <Button className="gap-2 glow-effect">
-                      <Download size={20} />
-                      Download Resume
-                    </Button>
+                    <a href="/Kunwar_Data_Analyst.pdf" download>
+                      <Button className="gap-2 glow-effect">
+                        <Download size={20} />
+                        Download Resume
+                      </Button>
+                    </a>
                   </div>
                 </div>
               </div>
@@ -229,7 +255,7 @@ const Index = () => {
               {[
                 { label: "Projects", value: "5+" },
                 { label: "Skills", value: "20+" },
-                { label: "Certificates", value: "3+" },
+                { label: "Certificates", value: "3" },
               ].map((stat, index) => (
                 <Card 
                   key={index} 
@@ -318,6 +344,7 @@ const Index = () => {
               </p>
             </div>
 
+            {/* Skills Timeline */}
             <div className="relative">
               <div className="absolute left-0 md:left-1/2 transform md:-translate-x-1/2 h-full w-0.5 bg-border" />
               
@@ -390,6 +417,46 @@ const Index = () => {
                 ))}
               </div>
             </div>
+
+            {/* Certifications Cards */}
+            <div className="pt-8">
+              <h2 className="text-2xl md:text-3xl font-bold text-center mb-8">
+                My <span className="text-gradient">Certifications</span>
+              </h2>
+              <div className="grid md:grid-cols-3 gap-6">
+                {certifications.map((cert, index) => (
+                  <Card 
+                    key={index} 
+                    className="p-6 card-hover animate-slide-up border-primary/10 hover:border-primary/30 transition-all duration-300"
+                    style={{ animationDelay: `${index * 0.15}s` }}
+                  >
+                    <div className="space-y-4">
+                      <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center">
+                        <Award size={24} className="text-primary" />
+                      </div>
+                      <div>
+                        <h3 className="text-lg font-semibold text-primary">{cert.title}</h3>
+                        <p className="text-sm text-muted-foreground">{cert.issuer}</p>
+                      </div>
+                      <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                        <Calendar size={14} />
+                        <span>{cert.date}</span>
+                      </div>
+                      <p className="text-sm text-muted-foreground leading-relaxed">
+                        {cert.description}
+                      </p>
+                      <div className="flex flex-wrap gap-1.5">
+                        {cert.skills.map((skill, i) => (
+                          <Badge key={i} variant="secondary" className="text-xs">
+                            {skill}
+                          </Badge>
+                        ))}
+                      </div>
+                    </div>
+                  </Card>
+                ))}
+              </div>
+            </div>
           </div>
         </div>
       </section>
@@ -417,29 +484,29 @@ const Index = () => {
                       <p className="text-sm text-muted-foreground">Last updated: April 2026</p>
                     </div>
                   </div>
-                  <Button className="gap-2 glow-effect">
-                    <Download size={20} />
-                    Download
-                  </Button>
+                  <a href="/Kunwar_Data_Analyst.pdf" download>
+                    <Button className="gap-2 glow-effect">
+                      <Download size={20} />
+                      Download
+                    </Button>
+                  </a>
                 </div>
 
-                <div className="border-2 border-border rounded-lg bg-muted/30 h-[600px] flex items-center justify-center">
-                  <div className="text-center space-y-4">
-                    <FileText size={64} className="mx-auto text-muted-foreground" />
-                    <div>
-                      <p className="text-muted-foreground mb-2">PDF Preview</p>
-                      <p className="text-sm text-muted-foreground">
-                        Your resume will be displayed here
-                      </p>
-                    </div>
-                  </div>
+                <div className="border-2 border-border rounded-lg bg-muted/30 overflow-hidden">
+                  <iframe 
+                    src="/Kunwar_Data_Analyst.pdf" 
+                    className="w-full h-[700px]"
+                    title="Resume Preview"
+                  />
                 </div>
 
                 <div className="text-center">
-                  <Button variant="outline" className="gap-2">
-                    <Download size={20} />
-                    Download PDF
-                  </Button>
+                  <a href="/Kunwar_Data_Analyst.pdf" download>
+                    <Button variant="outline" className="gap-2">
+                      <Download size={20} />
+                      Download PDF
+                    </Button>
+                  </a>
                 </div>
               </div>
             </Card>
