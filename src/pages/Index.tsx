@@ -1,4 +1,5 @@
 import { TypeWriter } from "@/components/TypeWriter";
+import { SnakeAnimation } from "@/components/SnakeAnimation";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -130,13 +131,13 @@ const Index = () => {
         <div className="max-w-4xl mx-auto text-center space-y-8 animate-fade-in">
           <div className="space-y-4">
             <h1 className="text-5xl md:text-7xl font-bold tracking-tight">
-              Hi, I'm <span className="text-gradient">Kunwar Gupta</span>
+              Hi, I'm <span className="text-gradient relative inline-block">Kunwar Gupta<SnakeAnimation /></span>
             </h1>
             
             <div className="text-xl md:text-2xl text-muted-foreground h-8">
               <TypeWriter 
                 texts={[
-                  "Aspiring Data Analyst",
+                  "Data Analyst",
                   "Problem Solver",
                   "Lifelong Learner",
                   "Creator"
@@ -294,7 +295,7 @@ const Index = () => {
                   style={{ 
                     animationDelay: `${index * 0.1}s`,
                     top: `${100 + index * 20}px`,
-                    zIndex: projects.length - index
+                    zIndex: index + 1
                   }}
                 >
                   <div className="flex-1 space-y-4">
