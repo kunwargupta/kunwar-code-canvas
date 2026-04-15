@@ -87,10 +87,10 @@ export const ExperienceTimeline = () => {
 
           {/* Timeline container */}
           <div className="relative">
-            {/* Blue line - positioned at the dot level */}
-            <div className="absolute top-[18px] left-8 right-8 h-1 bg-border rounded-full z-0" />
+            {/* Blue line - positioned to pass through dot centers */}
+            <div className="absolute top-[10px] left-8 right-8 h-[3px] bg-border rounded-full z-0" />
             <div
-              className="absolute top-[18px] left-8 h-1 bg-primary rounded-full z-[1] shadow-[0_0_12px_hsl(var(--primary)/0.6)] transition-all duration-150 ease-linear"
+              className="absolute top-[10px] left-8 h-[3px] bg-primary rounded-full z-[1] shadow-[0_0_12px_hsl(var(--primary)/0.6)] transition-all duration-150 ease-linear"
               style={{ width: `calc(${scrollProgress * 100}% - 64px)`, maxWidth: 'calc(100% - 64px)' }}
             />
 
