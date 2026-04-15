@@ -4,6 +4,7 @@ import { Home, User, Briefcase, Award, FileText, Mail } from "lucide-react";
 const navItems = [
   { id: "home", label: "Home", icon: Home },
   { id: "about", label: "About", icon: User },
+  { id: "experience", label: "Experience", icon: Briefcase },
   { id: "projects", label: "Projects", icon: Briefcase },
   { id: "skills", label: "Skills", icon: Award },
   { id: "resume", label: "Resume", icon: FileText },
