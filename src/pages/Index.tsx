@@ -274,6 +274,9 @@ const Index = () => {
         </div>
       </section>
 
+      {/* Experience Section */}
+      <ExperienceTimeline />
+
       {/* Projects Section */}
       <section id="projects" className="min-h-screen flex items-center justify-center px-4 py-24">
         <div className="container mx-auto">
