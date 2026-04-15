@@ -109,7 +109,7 @@ export const ExperienceTimeline = () => {
                   >
                     {/* Dot - centered on the line */}
                     <div
-                      className={`w-5 h-5 rounded-full border-4 z-10 transition-all duration-500 flex-shrink-0 -mt-[2px] ${
+                      className={`w-5 h-5 rounded-full border-4 z-10 transition-all duration-500 flex-shrink-0 ${
                         isRevealed
                           ? "bg-primary border-primary shadow-[0_0_16px_hsl(var(--primary)/0.7)] scale-125"
                           : "bg-card border-border"
