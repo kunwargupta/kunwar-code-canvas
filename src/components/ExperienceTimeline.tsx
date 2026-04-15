@@ -33,14 +33,14 @@ const experiences: Experience[] = [
   },
 ];
 
-// Sort ascending by date
 const sortedExperiences = [...experiences].sort((a, b) => a.sortDate - b.sortDate);
 
 export const ExperienceTimeline = () => {
   const sectionRef = useRef<HTMLDivElement>(null);
-  const trackRef = useRef<HTMLDivElement>(null);
   const [scrollProgress, setScrollProgress] = useState(0);
-  const [isInView, setIsInView] = useState(false);
+
+  // Scale section height based on number of experiences
+  const sectionHeightVh = Math.max(120 + (sortedExperiences.length - 1) * 80, 150);
 
   useEffect(() => {
     const section = sectionRef.current;
@@ -51,20 +51,13 @@ export const ExperienceTimeline = () => {
       const sectionHeight = section.offsetHeight;
       const viewportHeight = window.innerHeight;
 
-      // Section is in view when its top is at or above viewport top
       if (rect.top <= 0 && rect.bottom >= viewportHeight) {
-        setIsInView(true);
-        // Calculate how far we've scrolled through the section
         const totalScrollable = sectionHeight - viewportHeight;
         const scrolled = Math.abs(rect.top);
-        const progress = Math.min(Math.max(scrolled / totalScrollable, 0), 1);
-        setScrollProgress(progress);
+        setScrollProgress(Math.min(Math.max(scrolled / totalScrollable, 0), 1));
       } else if (rect.top > 0) {
-        setIsInView(false);
         setScrollProgress(0);
       } else {
-        // Past the section
-        setIsInView(false);
         setScrollProgress(1);
       }
     };
@@ -74,22 +67,16 @@ export const ExperienceTimeline = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // Calculate how much the track should translate
-  const trackWidth = trackRef.current?.scrollWidth || 0;
-  const containerWidth = sectionRef.current?.offsetWidth || window.innerWidth;
-  const maxTranslate = Math.max(trackWidth - containerWidth + 80, 0); // 80px padding
-  const translateX = -scrollProgress * maxTranslate;
-
   return (
     <section
       id="experience"
       ref={sectionRef}
       className="relative px-4"
-      style={{ height: `${Math.max(100 + sortedExperiences.length * 60, 200)}vh` }}
+      style={{ height: `${sectionHeightVh}vh` }}
     >
       <div className="sticky top-0 h-screen flex flex-col justify-center overflow-hidden">
-        <div className="container mx-auto">
-          <div className="text-center space-y-4 mb-16 animate-fade-in">
+        <div className="container mx-auto max-w-5xl">
+          <div className="text-center space-y-4 mb-12 animate-fade-in">
             <h1 className="text-4xl md:text-5xl font-bold">
               My <span className="text-gradient">Experience</span>
             </h1>
@@ -98,45 +85,40 @@ export const ExperienceTimeline = () => {
             </p>
           </div>
 
-          {/* Horizontal timeline */}
+          {/* Timeline container */}
           <div className="relative">
-            {/* The blue line */}
-            <div className="absolute top-1/2 left-0 right-0 h-1 bg-border -translate-y-1/2 z-0" />
+            {/* Blue line - positioned at the dot level */}
+            <div className="absolute top-[18px] left-8 right-8 h-1 bg-border rounded-full z-0" />
             <div
-              className="absolute top-1/2 left-0 h-1 bg-primary -translate-y-1/2 z-[1] transition-all duration-100 ease-linear rounded-full shadow-[0_0_12px_hsl(var(--primary)/0.6)]"
-              style={{ width: `${scrollProgress * 100}%` }}
+              className="absolute top-[18px] left-8 h-1 bg-primary rounded-full z-[1] shadow-[0_0_12px_hsl(var(--primary)/0.6)] transition-all duration-150 ease-linear"
+              style={{ width: `calc(${scrollProgress * 100}% - 64px)`, maxWidth: 'calc(100% - 64px)' }}
             />
 
-            {/* Scrolling track */}
-            <div
-              ref={trackRef}
-              className="flex items-center gap-12 py-8 transition-transform duration-100 ease-linear"
-              style={{ transform: `translateX(${translateX}px)` }}
-            >
+            {/* Experience items laid out horizontally */}
+            <div className="flex items-start gap-8 overflow-visible px-8">
               {sortedExperiences.map((exp, index) => {
                 const itemProgress = sortedExperiences.length === 1
                   ? scrollProgress
                   : scrollProgress * sortedExperiences.length - index;
-                const isRevealed = itemProgress > 0.1;
+                const isRevealed = itemProgress > 0.15;
 
                 return (
                   <div
                     key={index}
-                    className="flex flex-col items-center relative flex-shrink-0"
-                    style={{ width: "clamp(320px, 40vw, 480px)" }}
+                    className="flex flex-col items-center flex-1 min-w-0"
                   >
-                    {/* Dot on timeline */}
+                    {/* Dot */}
                     <div
-                      className={`w-5 h-5 rounded-full border-4 z-10 transition-all duration-500 ${
+                      className={`w-5 h-5 rounded-full border-4 z-10 transition-all duration-500 flex-shrink-0 ${
                         isRevealed
                           ? "bg-primary border-primary shadow-[0_0_16px_hsl(var(--primary)/0.7)] scale-125"
                           : "bg-card border-border"
                       }`}
                     />
 
-                    {/* Date label */}
+                    {/* Date */}
                     <div
-                      className={`mt-3 mb-4 text-sm font-medium flex items-center gap-1.5 transition-all duration-500 ${
+                      className={`mt-4 mb-4 text-sm font-medium flex items-center gap-1.5 transition-all duration-500 ${
                         isRevealed ? "text-primary opacity-100" : "text-muted-foreground opacity-40"
                       }`}
                     >
@@ -144,12 +126,12 @@ export const ExperienceTimeline = () => {
                       {exp.date}
                     </div>
 
-                    {/* Experience card */}
+                    {/* Card - below the line, no overlap */}
                     <Card
-                      className={`p-6 w-full transition-all duration-700 border-primary/10 hover:border-primary/40 ${
+                      className={`p-6 w-full max-w-md transition-all duration-700 border-primary/10 hover:border-primary/40 ${
                         isRevealed
                           ? "opacity-100 translate-y-0 shadow-lg shadow-primary/10"
-                          : "opacity-20 translate-y-4"
+                          : "opacity-20 translate-y-6"
                       }`}
                     >
                       <div className="space-y-3">
@@ -157,7 +139,7 @@ export const ExperienceTimeline = () => {
                           <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0">
                             <Briefcase size={20} className="text-primary" />
                           </div>
-                          <div>
+                          <div className="min-w-0">
                             <h3 className="text-lg font-semibold">{exp.title}</h3>
                             <p className="text-primary font-medium text-sm">{exp.company}</p>
                           </div>
@@ -174,10 +156,7 @@ export const ExperienceTimeline = () => {
 
                         <div className="flex flex-wrap gap-1.5">
                           {exp.skills.slice(0, 3).map((skill, i) => (
-                            <Badge
-                              key={i}
-                              className="text-xs bg-primary/10 text-primary border-primary/20"
-                            >
+                            <Badge key={i} className="text-xs bg-primary/10 text-primary border-primary/20">
                               {skill}
                             </Badge>
                           ))}
@@ -185,11 +164,7 @@ export const ExperienceTimeline = () => {
 
                         <Dialog>
                           <DialogTrigger asChild>
-                            <Button
-                              variant="ghost"
-                              size="sm"
-                              className="gap-1.5 text-primary hover:bg-primary/10 w-full mt-2"
-                            >
+                            <Button variant="ghost" size="sm" className="gap-1.5 text-primary hover:bg-primary/10 w-full mt-2">
                               View Details <ChevronRight size={14} />
                             </Button>
                           </DialogTrigger>
@@ -214,20 +189,13 @@ export const ExperienceTimeline = () => {
                                 {exp.description.map((point, i) => (
                                   <div key={i} className="flex gap-3">
                                     <div className="w-2 h-2 rounded-full bg-primary mt-2 flex-shrink-0" />
-                                    <p className="text-sm text-muted-foreground leading-relaxed">
-                                      {point}
-                                    </p>
+                                    <p className="text-sm text-muted-foreground leading-relaxed">{point}</p>
                                   </div>
                                 ))}
                               </div>
                               <div className="flex flex-wrap gap-2 pt-2 border-t border-border">
                                 {exp.skills.map((skill, i) => (
-                                  <Badge
-                                    key={i}
-                                    className="bg-primary/10 text-primary border-primary/20"
-                                  >
-                                    {skill}
-                                  </Badge>
+                                  <Badge key={i} className="bg-primary/10 text-primary border-primary/20">{skill}</Badge>
                                 ))}
                               </div>
                             </div>
