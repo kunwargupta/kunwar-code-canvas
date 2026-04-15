@@ -1,4 +1,5 @@
 import { TypeWriter } from "@/components/TypeWriter";
+import { ExperienceTimeline } from "@/components/ExperienceTimeline";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -272,6 +273,9 @@ const Index = () => {
           </div>
         </div>
       </section>
+
+      {/* Experience Section */}
+      <ExperienceTimeline />
 
       {/* Projects Section */}
       <section id="projects" className="min-h-screen flex items-center justify-center px-4 py-24">
