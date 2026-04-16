@@ -294,7 +294,7 @@ const Index = () => {
               {projects.map((project, index) => (
                 <Card
                   key={index}
-                  className="p-8 flex flex-col animate-slide-up sticky top-24 backdrop-blur-sm"
+                  className="p-8 flex flex-col animate-slide-up sticky top-24 backdrop-blur-sm bg-card border-primary/20 hover:border-primary/40 transition-colors"
                   style={{ 
                     animationDelay: `${index * 0.1}s`,
                     top: `${100 + index * 20}px`,
