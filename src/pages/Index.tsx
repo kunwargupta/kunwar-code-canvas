@@ -478,7 +478,7 @@ const Index = () => {
               </p>
             </div>
 
-            <Card className="p-8 card-hover">
+            <Card className="p-8 card-hover bg-card border-primary/20 hover:border-primary/40 transition-colors">
               <div className="space-y-6">
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-3">
@@ -496,7 +496,7 @@ const Index = () => {
                   </a>
                 </div>
 
-                <div className="border-2 border-border rounded-lg bg-muted/30 overflow-hidden">
+                <div className="border border-primary/20 rounded-lg bg-card overflow-hidden">
                   <iframe 
                     src="/Kunwar_Data_Analyst.pdf" 
                     className="w-full h-[700px]"
@@ -621,7 +621,7 @@ const Index = () => {
                   </div>
                 </Card>
 
-                <Card className="p-6 card-hover">
+                <Card className="p-6 card-hover bg-card border-primary/20 hover:border-primary/40 transition-colors">
                   <h3 className="text-xl font-semibold mb-4">Connect With Me</h3>
                   <div className="space-y-3">
                     <a
