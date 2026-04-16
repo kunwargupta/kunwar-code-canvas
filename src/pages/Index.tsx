@@ -260,7 +260,7 @@ const Index = () => {
               ].map((stat, index) => (
                 <Card 
                   key={index} 
-                  className="p-6 text-center card-hover"
+                  className="p-6 text-center card-hover bg-card border-primary/20 hover:border-primary/40 transition-colors"
                   style={{ animationDelay: `${index * 0.1}s` }}
                 >
                   <div className="text-4xl font-bold text-gradient mb-2">
@@ -362,7 +362,7 @@ const Index = () => {
                     style={{ animationDelay: `${index * 0.1}s` }}
                   >
                     <div className={`w-full md:w-1/2 ${index % 2 === 0 ? "md:pr-8" : "md:pl-8"}`}>
-                      <Card className="p-6 water-fill group cursor-pointer border-primary/20 hover:border-primary/50 transition-all duration-300">
+                      <Card className="p-6 water-fill group cursor-pointer bg-card border-primary/20 hover:border-primary/50 transition-all duration-300">
                         <div className="space-y-4">
                           <div className="flex items-start justify-between gap-4">
                             <div>
