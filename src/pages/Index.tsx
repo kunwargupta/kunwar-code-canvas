@@ -532,10 +532,10 @@ const Index = () => {
             </div>
 
             <div className="grid md:grid-cols-2 gap-8">
-              <Card className="p-8 card-hover animate-slide-up">
+              <Card className="p-8 card-hover animate-slide-up bg-card border-primary/20 hover:border-primary/40 transition-colors">
                 <form onSubmit={handleSubmit} className="space-y-6">
                   <div className="space-y-2">
-                    <label htmlFor="name" className="text-sm font-medium">
+                    <label htmlFor="name" className="text-sm font-medium text-foreground">
                       Name
                     </label>
                     <Input
