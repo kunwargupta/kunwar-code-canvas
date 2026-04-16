@@ -208,7 +208,7 @@ const Index = () => {
 
             <Card 
               ref={aboutCardRef}
-              className="p-8 md:p-12 tilt-card"
+              className="p-8 md:p-12 tilt-card bg-card border-primary/20"
               style={{ 
                 transform: aboutCardTransform,
                 boxShadow: aboutCardHovered 
@@ -260,7 +260,7 @@ const Index = () => {
               ].map((stat, index) => (
                 <Card 
                   key={index} 
-                  className="p-6 text-center card-hover"
+                  className="p-6 text-center card-hover bg-card border-primary/20 hover:border-primary/40 transition-colors"
                   style={{ animationDelay: `${index * 0.1}s` }}
                 >
                   <div className="text-4xl font-bold text-gradient mb-2">
@@ -294,7 +294,7 @@ const Index = () => {
               {projects.map((project, index) => (
                 <Card
                   key={index}
-                  className="p-8 flex flex-col animate-slide-up sticky top-24 backdrop-blur-sm"
+                  className="p-8 flex flex-col animate-slide-up sticky top-24 backdrop-blur-sm bg-card border-primary/20 hover:border-primary/40 transition-colors"
                   style={{ 
                     animationDelay: `${index * 0.1}s`,
                     top: `${100 + index * 20}px`,
@@ -362,7 +362,7 @@ const Index = () => {
                     style={{ animationDelay: `${index * 0.1}s` }}
                   >
                     <div className={`w-full md:w-1/2 ${index % 2 === 0 ? "md:pr-8" : "md:pl-8"}`}>
-                      <Card className="p-6 water-fill group cursor-pointer border-primary/20 hover:border-primary/50 transition-all duration-300">
+                      <Card className="p-6 water-fill group cursor-pointer bg-card border-primary/20 hover:border-primary/50 transition-all duration-300">
                         <div className="space-y-4">
                           <div className="flex items-start justify-between gap-4">
                             <div>
@@ -478,7 +478,7 @@ const Index = () => {
               </p>
             </div>
 
-            <Card className="p-8 card-hover">
+            <Card className="p-8 card-hover bg-card border-primary/20 hover:border-primary/40 transition-colors">
               <div className="space-y-6">
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-3">
@@ -496,7 +496,7 @@ const Index = () => {
                   </a>
                 </div>
 
-                <div className="border-2 border-border rounded-lg bg-muted/30 overflow-hidden">
+                <div className="border border-primary/20 rounded-lg bg-card overflow-hidden">
                   <iframe 
                     src="/Kunwar_Data_Analyst.pdf" 
                     className="w-full h-[700px]"
@@ -532,10 +532,10 @@ const Index = () => {
             </div>
 
             <div className="grid md:grid-cols-2 gap-8">
-              <Card className="p-8 card-hover animate-slide-up">
+              <Card className="p-8 card-hover animate-slide-up bg-card border-primary/20 hover:border-primary/40 transition-colors">
                 <form onSubmit={handleSubmit} className="space-y-6">
                   <div className="space-y-2">
-                    <label htmlFor="name" className="text-sm font-medium">
+                    <label htmlFor="name" className="text-sm font-medium text-foreground">
                       Name
                     </label>
                     <Input
@@ -548,7 +548,7 @@ const Index = () => {
                   </div>
 
                   <div className="space-y-2">
-                    <label htmlFor="email" className="text-sm font-medium">
+                    <label htmlFor="email" className="text-sm font-medium text-foreground">
                       Email
                     </label>
                     <Input
@@ -562,7 +562,7 @@ const Index = () => {
                   </div>
 
                   <div className="space-y-2">
-                    <label htmlFor="message" className="text-sm font-medium">
+                    <label htmlFor="message" className="text-sm font-medium text-foreground">
                       Message
                     </label>
                     <Textarea
@@ -582,7 +582,7 @@ const Index = () => {
               </Card>
 
               <div className="space-y-6 animate-slide-up" style={{ animationDelay: "0.1s" }}>
-                <Card className="p-6 card-hover">
+                <Card className="p-6 card-hover bg-card border-primary/20 hover:border-primary/40 transition-colors">
                   <h3 className="text-xl font-semibold mb-4">Contact Information</h3>
                   <div className="space-y-4">
                     <div className="flex items-center gap-3">
@@ -621,7 +621,7 @@ const Index = () => {
                   </div>
                 </Card>
 
-                <Card className="p-6 card-hover">
+                <Card className="p-6 card-hover bg-card border-primary/20 hover:border-primary/40 transition-colors">
                   <h3 className="text-xl font-semibold mb-4">Connect With Me</h3>
                   <div className="space-y-3">
                     <a

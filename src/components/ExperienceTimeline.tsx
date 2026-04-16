@@ -128,7 +128,7 @@ export const ExperienceTimeline = () => {
 
                     {/* Card - below the line, no overlap */}
                     <Card
-                      className={`p-6 w-full max-w-md transition-all duration-700 border-primary/10 hover:border-primary/40 ${
+                      className={`p-6 w-full max-w-md bg-card border-primary/20 hover:border-primary/40 transition-all duration-700 ${
                         isRevealed
                           ? "opacity-100 translate-y-0 shadow-lg shadow-primary/10"
                           : "opacity-20 translate-y-6"
