@@ -208,7 +208,7 @@ const Index = () => {
 
             <Card 
               ref={aboutCardRef}
-              className="p-8 md:p-12 tilt-card"
+              className="p-8 md:p-12 tilt-card bg-card border-primary/20"
               style={{ 
                 transform: aboutCardTransform,
                 boxShadow: aboutCardHovered 
