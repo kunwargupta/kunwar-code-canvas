@@ -548,7 +548,7 @@ const Index = () => {
                   </div>
 
                   <div className="space-y-2">
-                    <label htmlFor="email" className="text-sm font-medium">
+                    <label htmlFor="email" className="text-sm font-medium text-foreground">
                       Email
                     </label>
                     <Input
@@ -562,7 +562,7 @@ const Index = () => {
                   </div>
 
                   <div className="space-y-2">
-                    <label htmlFor="message" className="text-sm font-medium">
+                    <label htmlFor="message" className="text-sm font-medium text-foreground">
                       Message
                     </label>
                     <Textarea
@@ -582,7 +582,7 @@ const Index = () => {
               </Card>
 
               <div className="space-y-6 animate-slide-up" style={{ animationDelay: "0.1s" }}>
-                <Card className="p-6 card-hover">
+                <Card className="p-6 card-hover bg-card border-primary/20 hover:border-primary/40 transition-colors">
                   <h3 className="text-xl font-semibold mb-4">Contact Information</h3>
                   <div className="space-y-4">
                     <div className="flex items-center gap-3">
