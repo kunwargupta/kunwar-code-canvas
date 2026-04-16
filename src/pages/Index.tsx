@@ -1,5 +1,6 @@
 import { TypeWriter } from "@/components/TypeWriter";
 import { ExperienceTimeline } from "@/components/ExperienceTimeline";
+import { DotGrid } from "@/components/DotGrid";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -125,70 +126,87 @@ const Index = () => {
   return (
     <div className="w-full">
       {/* Home Section */}
-      <section id="home" className="min-h-screen flex items-center justify-center px-4">
-        <div className="max-w-4xl mx-auto text-center space-y-8 animate-fade-in">
-          <div className="space-y-4">
-            <h1 className="text-5xl md:text-7xl font-bold tracking-tight">
-              Hi, I'm <span className="text-gradient">Kunwar Ji Gupta</span>
-            </h1>
-            
-            <div className="text-xl md:text-2xl text-muted-foreground h-8">
-              <TypeWriter 
-                texts={[
-                  "Data Analyst",
-                  "Problem Solver",
-                  "Lifelong Learner",
-                  "Creator"
-                ]}
-              />
+      <section id="home" className="min-h-screen flex items-center justify-center px-4 relative overflow-hidden">
+        <DotGrid />
+        <div className="container mx-auto max-w-6xl relative z-10">
+          <div className="grid md:grid-cols-[1fr,auto] gap-12 md:gap-16 items-center">
+            {/* Left — Text */}
+            <div className="space-y-6 animate-fade-in text-center md:text-left">
+              <h1 className="text-5xl md:text-7xl font-bold tracking-tight leading-tight">
+                Hi, I'm <span className="text-gradient">Kunwar Ji Gupta</span>
+              </h1>
+
+              <div className="text-xl md:text-2xl text-muted-foreground h-8">
+                <TypeWriter
+                  texts={[
+                    "Data Analyst",
+                    "Problem Solver",
+                    "SQL Expert"
+                  ]}
+                />
+              </div>
+
+              <p className="text-lg text-muted-foreground max-w-xl">
+                Data Analyst with hands-on experience in SQL, Python, Power BI, and Excel, focused on data validation, EDA, and KPI reporting.
+              </p>
+
+              <div className="flex flex-wrap gap-4 justify-center md:justify-start items-center">
+                <Button
+                  size="lg"
+                  className="gap-2 bg-gradient-to-r from-primary to-[hsl(var(--hero-gradient-end))] text-primary-foreground hover:opacity-90 shadow-[0_0_20px_hsl(var(--primary)/0.3)] transition-all duration-300"
+                  onClick={() => scrollToSection('projects')}
+                >
+                  View My Work <ArrowRight size={20} />
+                </Button>
+                <Button
+                  size="lg"
+                  variant="outline"
+                  className="gap-2 border-primary/50 text-primary hover:bg-primary/10 hover:border-primary"
+                  onClick={() => scrollToSection('contact')}
+                >
+                  Get in Touch
+                </Button>
+              </div>
+
+              <div className="flex gap-6 justify-center md:justify-start pt-2">
+                <a
+                  href="https://github.com/kunwargupta"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-muted-foreground hover:text-primary transition-all duration-300 hover:drop-shadow-[0_0_8px_hsl(var(--primary)/0.7)]"
+                >
+                  <Github size={24} />
+                </a>
+                <a
+                  href="https://www.linkedin.com/in/kunwarjigupta/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-muted-foreground hover:text-primary transition-all duration-300 hover:drop-shadow-[0_0_8px_hsl(var(--primary)/0.7)]"
+                >
+                  <Linkedin size={24} />
+                </a>
+                <a
+                  href="mailto:Kunwargupta7@gmail.com"
+                  className="text-muted-foreground hover:text-primary transition-all duration-300 hover:drop-shadow-[0_0_8px_hsl(var(--primary)/0.7)]"
+                >
+                  <Mail size={24} />
+                </a>
+              </div>
             </div>
-          </div>
 
-          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            Data Analyst with hands-on experience in SQL, Python, Power BI, and Excel, focused on data validation, EDA, and KPI reporting.
-          </p>
-
-          <div className="flex flex-wrap gap-4 justify-center items-center">
-            <Button 
-              size="lg" 
-              className="gap-2 glow-effect"
-              onClick={() => scrollToSection('projects')}
-            >
-              View My Work <ArrowRight size={20} />
-            </Button>
-            <Button 
-              size="lg" 
-              variant="outline" 
-              className="gap-2"
-              onClick={() => scrollToSection('contact')}
-            >
-              Get in Touch
-            </Button>
-          </div>
-
-          <div className="flex gap-6 justify-center pt-8">
-            <a 
-              href="https://github.com/kunwargupta" 
-              target="_blank" 
-              rel="noopener noreferrer"
-              className="text-muted-foreground hover:text-primary transition-colors glow-effect"
-            >
-              <Github size={24} />
-            </a>
-            <a 
-              href="https://www.linkedin.com/in/kunwarjigupta/" 
-              target="_blank" 
-              rel="noopener noreferrer"
-              className="text-muted-foreground hover:text-primary transition-colors glow-effect"
-            >
-              <Linkedin size={24} />
-            </a>
-            <a 
-              href="mailto:Kunwargupta7@gmail.com"
-              className="text-muted-foreground hover:text-primary transition-colors glow-effect"
-            >
-              <Mail size={24} />
-            </a>
+            {/* Right — Profile Photo Placeholder */}
+            <div className="flex justify-center animate-fade-in" style={{ animationDelay: "0.3s" }}>
+              <div className="relative">
+                {/* Outer glow ring */}
+                <div className="absolute -inset-3 rounded-full bg-gradient-to-br from-primary/40 to-[hsl(var(--hero-gradient-end))/40] blur-xl animate-pulse" />
+                {/* Border ring */}
+                <div className="relative w-64 h-64 md:w-72 md:h-72 rounded-full p-[3px] bg-gradient-to-br from-primary to-[hsl(var(--hero-gradient-end))]">
+                  <div className="w-full h-full rounded-full bg-card flex items-center justify-center overflow-hidden">
+                    <User size={96} className="text-primary/40" />
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </section>
