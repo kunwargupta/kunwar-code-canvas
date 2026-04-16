@@ -1,6 +1,7 @@
 import { TypeWriter } from "@/components/TypeWriter";
 import { ExperienceTimeline } from "@/components/ExperienceTimeline";
 import { DotGrid } from "@/components/DotGrid";
+import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
