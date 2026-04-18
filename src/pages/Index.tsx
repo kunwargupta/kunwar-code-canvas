@@ -214,7 +214,7 @@ const Index = () => {
       </section>
 
       {/* About Section */}
-      <section id="about" className="min-h-screen flex items-center justify-center px-4 py-24">
+      <section id="about" className="min-h-screen flex items-center justify-center px-4 py-16">
         <div className="container mx-auto">
           <div className="max-w-4xl mx-auto space-y-12 animate-fade-in">
             <div className="text-center space-y-4">
@@ -305,7 +305,7 @@ const Index = () => {
       <ExperienceTimeline />
 
       {/* Projects Section */}
-      <section id="projects" className="min-h-screen flex items-center justify-center px-4 py-24">
+      <section id="projects" className="min-h-screen flex items-center justify-center px-4 py-16">
         <div className="container mx-auto">
           <div className="max-w-6xl mx-auto space-y-12">
             <div className="text-center space-y-4 animate-fade-in">
@@ -384,7 +384,7 @@ const Index = () => {
       </section>
 
       {/* Skills Section */}
-      <section id="skills" className="min-h-screen flex items-center justify-center px-4 py-24">
+      <section id="skills" className="min-h-screen flex items-center justify-center px-4 py-16">
         <div className="container mx-auto">
           <div className="max-w-5xl mx-auto space-y-12">
             <div className="text-center space-y-4 animate-fade-in">
@@ -454,7 +454,7 @@ const Index = () => {
       </section>
 
       {/* Resume Section */}
-      <section id="resume" className="min-h-screen flex items-center justify-center px-4 py-24">
+      <section id="resume" className="min-h-screen flex items-center justify-center px-4 py-16">
         <div className="container mx-auto">
           <div className="max-w-4xl mx-auto space-y-12 animate-fade-in">
             <div className="text-center space-y-4">
@@ -507,8 +507,9 @@ const Index = () => {
       </section>
 
       {/* Contact Section */}
-      <section id="contact" className="min-h-screen flex items-center justify-center px-4 py-24">
-        <div className="container mx-auto">
+      <section id="contact" className="relative min-h-screen flex items-center justify-center px-4 py-16 overflow-hidden">
+        <div className="absolute inset-0 animated-gradient-bg pointer-events-none" />
+        <div className="container mx-auto relative z-10">
           <div className="max-w-5xl mx-auto space-y-12">
             <div className="text-center space-y-4 animate-fade-in">
               <h1 className="text-4xl md:text-5xl font-bold">
@@ -563,7 +564,10 @@ const Index = () => {
                     />
                   </div>
 
-                  <Button type="submit" className="w-full glow-effect">
+                  <Button
+                    type="submit"
+                    className="w-full gap-2 bg-gradient-to-r from-primary to-[hsl(var(--hero-gradient-end))] text-primary-foreground hover:opacity-90 hover:scale-[1.02] shadow-[0_0_20px_hsl(var(--primary)/0.3)] transition-all duration-300"
+                  >
                     Send Message
                   </Button>
                 </form>
