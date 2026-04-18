@@ -1,11 +1,11 @@
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
-import { BarChart3, LineChart } from "lucide-react";
+import { BarChart3, LineChart, type LucideIcon } from "lucide-react";
 
 type Skill = {
   name: string;
   slug?: string; // simple-icons slug
   color: string; // brand hex (no #)
-  LucideIcon?: React.ComponentType<{ size?: number; color?: string; className?: string }>;
+  Icon?: LucideIcon;
 };
 
 const groups: { category: string; skills: Skill[] }[] = [
