@@ -298,7 +298,7 @@ const Index = () => {
       {/* Projects Section */}
       <section id="projects" className="min-h-screen flex items-center justify-center px-4 py-24">
         <div className="container mx-auto">
-          <div className="max-w-4xl mx-auto space-y-12">
+          <div className="max-w-6xl mx-auto space-y-12">
             <div className="text-center space-y-4 animate-fade-in">
               <h1 className="text-4xl md:text-5xl font-bold">
                 My <span className="text-gradient">Projects</span>
@@ -308,46 +308,67 @@ const Index = () => {
               </p>
             </div>
 
-            <div className="relative space-y-6">
-              {projects.map((project, index) => (
-                <Card
-                  key={index}
-                  className="p-8 flex flex-col animate-slide-up sticky top-24 backdrop-blur-sm bg-card border-primary/20 hover:border-primary/40 transition-colors"
-                  style={{ 
-                    animationDelay: `${index * 0.1}s`,
-                    top: `${100 + index * 20}px`,
-                    zIndex: index + 1
-                  }}
-                >
-                  <div className="flex-1 space-y-4">
-                    <h3 className="text-2xl font-semibold">{project.title}</h3>
-                    <p className="text-muted-foreground leading-relaxed">
-                      {project.description}
-                    </p>
-                    <div className="flex flex-wrap gap-2">
-                      {project.tech.map((tech, i) => (
-                        <Badge key={i} variant="secondary">
-                          {tech}
-                        </Badge>
-                      ))}
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {projects.map((project, index) => {
+                const getTechColor = (tech: string) => {
+                  const t = tech.toLowerCase();
+                  if (t.includes("sql") || t.includes("mysql")) return "bg-blue-500/15 text-blue-400 border-blue-500/30";
+                  if (t.includes("python") || t.includes("pandas") || t.includes("numpy") || t.includes("matplotlib") || t.includes("seaborn")) return "bg-cyan-500/15 text-cyan-400 border-cyan-500/30";
+                  if (t.includes("excel") || t.includes("sheets")) return "bg-emerald-500/15 text-emerald-400 border-emerald-500/30";
+                  if (t.includes("power bi") || t.includes("powerbi")) return "bg-purple-500/15 text-purple-400 border-purple-500/30";
+                  if (t.includes("tableau")) return "bg-orange-500/15 text-orange-400 border-orange-500/30";
+                  return "bg-primary/10 text-primary border-primary/30";
+                };
+
+                return (
+                  <Card
+                    key={index}
+                    className="group relative p-6 flex flex-col bg-card/80 backdrop-blur-md border border-primary/20 rounded-xl opacity-0 animate-fade-in transition-all duration-300 hover:scale-[1.02] hover:border-primary/60 hover:shadow-[0_20px_50px_-15px_hsl(var(--primary)/0.4),0_0_30px_-5px_hsl(var(--primary)/0.3)]"
+                    style={{
+                      animationDelay: `${index * 0.1}s`,
+                      animationFillMode: "forwards",
+                    }}
+                  >
+                    {index < 2 && (
+                      <Badge className="absolute -top-2 -right-2 bg-gradient-to-r from-primary to-[hsl(var(--hero-gradient-end))] text-primary-foreground border-0 shadow-[0_0_15px_hsl(var(--primary)/0.5)]">
+                        Featured
+                      </Badge>
+                    )}
+
+                    <div className="flex-1 space-y-4">
+                      <h3 className="text-xl font-semibold leading-tight group-hover:text-primary transition-colors">
+                        {project.title}
+                      </h3>
+                      <p className="text-sm text-muted-foreground leading-relaxed line-clamp-4">
+                        {project.description}
+                      </p>
+                      <div className="flex flex-wrap gap-2">
+                        {project.tech.map((tech, i) => (
+                          <span
+                            key={i}
+                            className={`text-xs px-2.5 py-1 rounded-full border font-medium ${getTechColor(tech)}`}
+                          >
+                            {tech}
+                          </span>
+                        ))}
+                      </div>
                     </div>
-                  </div>
-                  
-                  <div className="flex gap-3 mt-6 pt-6 border-t border-border">
-                    <a 
-                      href={project.github} 
-                      target="_blank" 
-                      rel="noopener noreferrer"
-                      className="flex-1"
-                    >
-                      <Button variant="outline" size="lg" className="w-full gap-2 hover:scale-105 transition-transform">
-                        <Github size={16} />
-                        View on GitHub
-                      </Button>
-                    </a>
-                  </div>
-                </Card>
-              ))}
+
+                    <div className="mt-6 pt-4 border-t border-primary/10">
+                      <a
+                        href={project.github}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        <Button variant="outline" size="sm" className="w-full gap-2 border-primary/30 hover:border-primary hover:bg-primary/10">
+                          <Github size={16} />
+                          View on GitHub
+                        </Button>
+                      </a>
+                    </div>
+                  </Card>
+                );
+              })}
             </div>
           </div>
         </div>
