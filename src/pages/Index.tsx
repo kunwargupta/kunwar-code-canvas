@@ -1,5 +1,6 @@
 import { TypeWriter } from "@/components/TypeWriter";
 import { ExperienceTimeline } from "@/components/ExperienceTimeline";
+import { SkillsLogos } from "@/components/SkillsLogos";
 import { DotGrid } from "@/components/DotGrid";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
@@ -7,7 +8,7 @@ import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
-import { ArrowRight, Github, Linkedin, Mail, Download, User, ExternalLink, Award, FileText, MapPin, Phone, Calendar } from "lucide-react";
+import { ArrowRight, Github, Linkedin, Mail, Download, User, ExternalLink, Award, FileText, MapPin, Phone, Calendar, GraduationCap, BookOpen, Trophy } from "lucide-react";
 import { useState } from "react";
 import { useToast } from "@/hooks/use-toast";
 import { useTilt } from "@/hooks/use-tilt";
@@ -387,79 +388,7 @@ const Index = () => {
               </p>
             </div>
 
-            {/* Skills Timeline */}
-            <div className="relative">
-              <div className="absolute left-0 md:left-1/2 transform md:-translate-x-1/2 h-full w-0.5 bg-border" />
-              
-              <div className="space-y-12">
-                {skills.map((skill, index) => (
-                  <div
-                    key={index}
-                    className={`relative flex items-center ${
-                      index % 2 === 0 ? "md:flex-row" : "md:flex-row-reverse"
-                    } animate-slide-up`}
-                    style={{ animationDelay: `${index * 0.1}s` }}
-                  >
-                    <div className={`w-full md:w-1/2 ${index % 2 === 0 ? "md:pr-8" : "md:pl-8"}`}>
-                      <Card className="p-6 water-fill group cursor-pointer bg-card border-primary/20 hover:border-primary/50 transition-all duration-300">
-                        <div className="space-y-4">
-                          <div className="flex items-start justify-between gap-4">
-                            <div>
-                              <h3 className="text-xl font-semibold mb-1 text-primary">
-                                {skill.category}
-                              </h3>
-                              <p className="text-sm text-muted-foreground">
-                                {skill.date}
-                              </p>
-                            </div>
-                            <Dialog>
-                              <DialogTrigger asChild>
-                                <Button size="sm" variant="ghost" className="gap-2 glow-effect hover:bg-primary/10">
-                                  <Award size={16} className="text-primary" />
-                                </Button>
-                              </DialogTrigger>
-                              <DialogContent>
-                                <DialogHeader>
-                                  <DialogTitle>{skill.certificate}</DialogTitle>
-                                </DialogHeader>
-                                <div className="space-y-4">
-                                  <div className="bg-muted/50 rounded-lg p-8 text-center">
-                                    <Award size={64} className="mx-auto text-primary mb-4" />
-                                    <p className="text-sm text-muted-foreground">
-                                      Certificate Preview
-                                    </p>
-                                  </div>
-                                  <a 
-                                    href={skill.certificateUrl} 
-                                    target="_blank" 
-                                    rel="noopener noreferrer"
-                                  >
-                                    <Button className="w-full gap-2">
-                                      <ExternalLink size={16} />
-                                      View Certificate
-                                    </Button>
-                                  </a>
-                                </div>
-                              </DialogContent>
-                            </Dialog>
-                          </div>
-                          
-                          <div className="flex flex-wrap gap-2">
-                            {skill.items.map((item, i) => (
-                              <Badge key={i} className="bg-primary/10 text-primary border-primary/20 hover:bg-primary/20 transition-colors">
-                                {item}
-                              </Badge>
-                            ))}
-                          </div>
-                        </div>
-                      </Card>
-                    </div>
-
-                    <div className="absolute left-0 md:left-1/2 transform md:-translate-x-1/2 w-4 h-4 rounded-full bg-primary border-4 border-background shadow-lg shadow-primary/50 animate-pulse" />
-                  </div>
-                ))}
-              </div>
-            </div>
+            <SkillsLogos />
 
             {/* Certifications Cards */}
             <div className="pt-8">
@@ -467,37 +396,49 @@ const Index = () => {
                 My <span className="text-gradient">Certifications</span>
               </h2>
               <div className="grid md:grid-cols-3 gap-6">
-                {certifications.map((cert, index) => (
-                  <Card 
-                    key={index} 
-                    className="p-6 card-hover animate-slide-up border-primary/10 hover:border-primary/30 transition-all duration-300"
-                    style={{ animationDelay: `${index * 0.15}s` }}
-                  >
-                    <div className="space-y-4">
-                      <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center">
-                        <Award size={24} className="text-primary" />
+                {certifications.map((cert, index) => {
+                  const platformStyles = [
+                    { Icon: GraduationCap, color: "#3B82F6", bg: "rgba(59,130,246,0.12)" }, // Career247 - blue
+                    { Icon: BookOpen, color: "#10B981", bg: "rgba(16,185,129,0.12)" },      // Simplilearn - green
+                    { Icon: Trophy, color: "#06B6D4", bg: "rgba(6,182,212,0.12)" },         // HackerRank - cyan
+                  ];
+                  const { Icon, color, bg } = platformStyles[index % platformStyles.length];
+
+                  return (
+                    <Card
+                      key={index}
+                      className="p-6 card-hover animate-slide-up border-primary/10 hover:border-primary/30 transition-all duration-300"
+                      style={{ animationDelay: `${index * 0.15}s` }}
+                    >
+                      <div className="space-y-4">
+                        <div
+                          className="w-12 h-12 rounded-lg flex items-center justify-center"
+                          style={{ backgroundColor: bg }}
+                        >
+                          <Icon size={24} style={{ color }} />
+                        </div>
+                        <div>
+                          <h3 className="text-lg font-semibold" style={{ color }}>{cert.title}</h3>
+                          <p className="text-sm text-muted-foreground">{cert.issuer}</p>
+                        </div>
+                        <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                          <Calendar size={14} />
+                          <span>{cert.date}</span>
+                        </div>
+                        <p className="text-sm text-muted-foreground leading-relaxed">
+                          {cert.description}
+                        </p>
+                        <div className="flex flex-wrap gap-1.5">
+                          {cert.skills.map((skill, i) => (
+                            <Badge key={i} variant="secondary" className="text-xs">
+                              {skill}
+                            </Badge>
+                          ))}
+                        </div>
                       </div>
-                      <div>
-                        <h3 className="text-lg font-semibold text-primary">{cert.title}</h3>
-                        <p className="text-sm text-muted-foreground">{cert.issuer}</p>
-                      </div>
-                      <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                        <Calendar size={14} />
-                        <span>{cert.date}</span>
-                      </div>
-                      <p className="text-sm text-muted-foreground leading-relaxed">
-                        {cert.description}
-                      </p>
-                      <div className="flex flex-wrap gap-1.5">
-                        {cert.skills.map((skill, i) => (
-                          <Badge key={i} variant="secondary" className="text-xs">
-                            {skill}
-                          </Badge>
-                        ))}
-                      </div>
-                    </div>
-                  </Card>
-                ))}
+                    </Card>
+                  );
+                })}
               </div>
             </div>
           </div>
