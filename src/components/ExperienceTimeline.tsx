@@ -1,4 +1,4 @@
-import { useRef, useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -35,178 +35,134 @@ const experiences: Experience[] = [
 
 const sortedExperiences = [...experiences].sort((a, b) => a.sortDate - b.sortDate);
 
-export const ExperienceTimeline = () => {
-  const sectionRef = useRef<HTMLDivElement>(null);
-  const [scrollProgress, setScrollProgress] = useState(0);
-
-  // Scale section height based on number of experiences
-  const sectionHeightVh = Math.max(120 + (sortedExperiences.length - 1) * 80, 150);
+const TimelineItem = ({ exp, index }: { exp: Experience; index: number }) => {
+  const ref = useRef<HTMLDivElement>(null);
+  const [visible, setVisible] = useState(false);
 
   useEffect(() => {
-    const section = sectionRef.current;
-    if (!section) return;
-
-    const handleScroll = () => {
-      const rect = section.getBoundingClientRect();
-      const sectionHeight = section.offsetHeight;
-      const viewportHeight = window.innerHeight;
-
-      if (rect.top <= 0 && rect.bottom >= viewportHeight) {
-        const totalScrollable = sectionHeight - viewportHeight;
-        const scrolled = Math.abs(rect.top);
-        setScrollProgress(Math.min(Math.max(scrolled / totalScrollable, 0), 1));
-      } else if (rect.top > 0) {
-        setScrollProgress(0);
-      } else {
-        setScrollProgress(1);
-      }
-    };
-
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    handleScroll();
-    return () => window.removeEventListener("scroll", handleScroll);
+    const el = ref.current;
+    if (!el) return;
+    const obs = new IntersectionObserver(
+      ([entry]) => entry.isIntersecting && setVisible(true),
+      { threshold: 0.2 }
+    );
+    obs.observe(el);
+    return () => obs.disconnect();
   }, []);
 
   return (
-    <section
-      id="experience"
-      ref={sectionRef}
-      className="relative px-4"
-      style={{ height: `${sectionHeightVh}vh` }}
+    <div
+      ref={ref}
+      className={`relative pl-20 transition-all duration-700 ease-out ${
+        visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
+      }`}
+      style={{ transitionDelay: `${index * 120}ms` }}
     >
-      <div className="sticky top-0 h-screen flex flex-col justify-center overflow-hidden">
-        <div className="container mx-auto max-w-5xl">
-          <div className="text-center space-y-4 mb-12 animate-fade-in">
-            <h1 className="text-4xl md:text-5xl font-bold">
-              My <span className="text-gradient">Experience</span>
-            </h1>
-            <p className="text-muted-foreground text-lg">
-              Professional journey in ascending order
-            </p>
+      {/* Dot on the line */}
+      <div className="absolute left-[26px] top-6 w-4 h-4 rounded-full bg-primary border-4 border-background shadow-[0_0_16px_hsl(var(--primary)/0.8)] z-10" />
+
+      <Card className="p-6 bg-card/80 backdrop-blur-md border-l-4 border-l-primary border-y border-r border-primary/20 hover:border-primary/50 hover:shadow-[0_10px_40px_-10px_hsl(var(--primary)/0.4)] transition-all duration-300">
+        <div className="space-y-3">
+          <div className="flex items-start gap-3">
+            <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0">
+              <Briefcase size={20} className="text-primary" />
+            </div>
+            <div className="min-w-0 flex-1">
+              <h3 className="text-lg font-semibold">{exp.title}</h3>
+              <p className="text-primary font-medium text-sm">{exp.company}</p>
+            </div>
           </div>
 
-          {/* Timeline container */}
-          <div className="relative">
-            {/* Blue line - positioned to pass through dot centers */}
-            <div className="absolute top-[10px] left-8 right-8 h-[3px] bg-border rounded-full z-0" />
-            <div
-              className="absolute top-[10px] left-8 h-[3px] bg-primary rounded-full z-[1] shadow-[0_0_12px_hsl(var(--primary)/0.6)] transition-all duration-150 ease-linear"
-              style={{ width: `calc(${scrollProgress * 100}% - 64px)`, maxWidth: 'calc(100% - 64px)' }}
-            />
+          <div className="flex flex-wrap items-center gap-x-4 gap-y-1 text-xs text-muted-foreground">
+            <span className="flex items-center gap-1.5 text-primary/80">
+              <Calendar size={12} /> {exp.date}
+            </span>
+            <span className="flex items-center gap-1.5">
+              <MapPin size={12} /> {exp.location}
+            </span>
+          </div>
 
-            {/* Experience items laid out horizontally */}
-            <div className="flex items-start gap-8 overflow-visible px-8">
-              {sortedExperiences.map((exp, index) => {
-                const itemProgress = sortedExperiences.length === 1
-                  ? scrollProgress
-                  : scrollProgress * sortedExperiences.length - index;
-                const isRevealed = itemProgress > 0.15;
+          <p className="text-sm text-muted-foreground leading-relaxed">{exp.shortDesc}</p>
 
-                return (
-                  <div
-                    key={index}
-                    className="flex flex-col items-center flex-1 min-w-0"
-                  >
-                    {/* Dot - centered on the line */}
-                    <div
-                      className={`w-5 h-5 rounded-full border-4 z-10 transition-all duration-500 flex-shrink-0 ${
-                        isRevealed
-                          ? "bg-primary border-primary shadow-[0_0_16px_hsl(var(--primary)/0.7)] scale-125"
-                          : "bg-card border-border"
-                      }`}
-                    />
+          <div className="flex flex-wrap gap-1.5">
+            {exp.skills.map((skill, i) => (
+              <Badge
+                key={i}
+                className="text-xs bg-transparent text-primary border border-primary/40 rounded-full px-2.5 py-0.5 hover:bg-primary/10 hover:border-primary hover:shadow-[0_0_10px_hsl(var(--primary)/0.4)] transition-all"
+              >
+                {skill}
+              </Badge>
+            ))}
+          </div>
 
-                    {/* Date */}
-                    <div
-                      className={`mt-4 mb-4 text-sm font-medium flex items-center gap-1.5 transition-all duration-500 ${
-                        isRevealed ? "text-primary opacity-100" : "text-muted-foreground opacity-40"
-                      }`}
-                    >
-                      <Calendar size={14} />
-                      {exp.date}
+          <Dialog>
+            <DialogTrigger asChild>
+              <Button variant="ghost" size="sm" className="gap-1.5 text-primary hover:bg-primary/10 mt-2">
+                View Details <ChevronRight size={14} />
+              </Button>
+            </DialogTrigger>
+            <DialogContent className="max-w-lg">
+              <DialogHeader>
+                <DialogTitle className="flex items-center gap-3">
+                  <Briefcase size={20} className="text-primary" />
+                  {exp.title}
+                </DialogTitle>
+              </DialogHeader>
+              <div className="space-y-4">
+                <div className="flex items-center justify-between text-sm text-muted-foreground">
+                  <span className="font-medium text-primary">{exp.company}</span>
+                  <span className="flex items-center gap-1">
+                    <Calendar size={14} /> {exp.date}
+                  </span>
+                </div>
+                <div className="flex items-center gap-1.5 text-sm text-muted-foreground">
+                  <MapPin size={14} /> {exp.location}
+                </div>
+                <div className="space-y-3 pt-2">
+                  {exp.description.map((point, i) => (
+                    <div key={i} className="flex gap-3">
+                      <div className="w-2 h-2 rounded-full bg-primary mt-2 flex-shrink-0" />
+                      <p className="text-sm text-muted-foreground leading-relaxed">{point}</p>
                     </div>
+                  ))}
+                </div>
+                <div className="flex flex-wrap gap-2 pt-2 border-t border-border">
+                  {exp.skills.map((skill, i) => (
+                    <Badge key={i} className="bg-primary/10 text-primary border-primary/20">
+                      {skill}
+                    </Badge>
+                  ))}
+                </div>
+              </div>
+            </DialogContent>
+          </Dialog>
+        </div>
+      </Card>
+    </div>
+  );
+};
 
-                    {/* Card - below the line, no overlap */}
-                    <Card
-                      className={`p-6 w-full max-w-md bg-card border-primary/20 hover:border-primary/40 transition-all duration-700 ${
-                        isRevealed
-                          ? "opacity-100 translate-y-0 shadow-lg shadow-primary/10"
-                          : "opacity-20 translate-y-6"
-                      }`}
-                    >
-                      <div className="space-y-3">
-                        <div className="flex items-start gap-3">
-                          <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0">
-                            <Briefcase size={20} className="text-primary" />
-                          </div>
-                          <div className="min-w-0">
-                            <h3 className="text-lg font-semibold">{exp.title}</h3>
-                            <p className="text-primary font-medium text-sm">{exp.company}</p>
-                          </div>
-                        </div>
+export const ExperienceTimeline = () => {
+  return (
+    <section id="experience" className="py-24 px-4">
+      <div className="container mx-auto max-w-4xl">
+        <div className="text-center space-y-4 mb-16 animate-fade-in">
+          <h1 className="text-4xl md:text-5xl font-bold">
+            My <span className="text-gradient">Experience</span>
+          </h1>
+          <p className="text-muted-foreground text-lg">
+            Professional journey in ascending order
+          </p>
+        </div>
 
-                        <div className="flex items-center gap-1.5 text-xs text-muted-foreground">
-                          <MapPin size={12} />
-                          {exp.location}
-                        </div>
+        <div className="relative">
+          {/* Glowing vertical line */}
+          <div className="absolute left-8 top-0 bottom-0 w-[2px] bg-gradient-to-b from-primary via-primary/60 to-primary/20 shadow-[0_0_12px_hsl(var(--primary)/0.6)] rounded-full" />
 
-                        <p className="text-sm text-muted-foreground leading-relaxed line-clamp-2">
-                          {exp.shortDesc}
-                        </p>
-
-                        <div className="flex flex-wrap gap-1.5">
-                          {exp.skills.slice(0, 3).map((skill, i) => (
-                            <Badge key={i} className="text-xs bg-primary/10 text-primary border-primary/20">
-                              {skill}
-                            </Badge>
-                          ))}
-                        </div>
-
-                        <Dialog>
-                          <DialogTrigger asChild>
-                            <Button variant="ghost" size="sm" className="gap-1.5 text-primary hover:bg-primary/10 w-full mt-2">
-                              View Details <ChevronRight size={14} />
-                            </Button>
-                          </DialogTrigger>
-                          <DialogContent className="max-w-lg">
-                            <DialogHeader>
-                              <DialogTitle className="flex items-center gap-3">
-                                <Briefcase size={20} className="text-primary" />
-                                {exp.title}
-                              </DialogTitle>
-                            </DialogHeader>
-                            <div className="space-y-4">
-                              <div className="flex items-center justify-between text-sm text-muted-foreground">
-                                <span className="font-medium text-primary">{exp.company}</span>
-                                <span className="flex items-center gap-1">
-                                  <Calendar size={14} /> {exp.date}
-                                </span>
-                              </div>
-                              <div className="flex items-center gap-1.5 text-sm text-muted-foreground">
-                                <MapPin size={14} /> {exp.location}
-                              </div>
-                              <div className="space-y-3 pt-2">
-                                {exp.description.map((point, i) => (
-                                  <div key={i} className="flex gap-3">
-                                    <div className="w-2 h-2 rounded-full bg-primary mt-2 flex-shrink-0" />
-                                    <p className="text-sm text-muted-foreground leading-relaxed">{point}</p>
-                                  </div>
-                                ))}
-                              </div>
-                              <div className="flex flex-wrap gap-2 pt-2 border-t border-border">
-                                {exp.skills.map((skill, i) => (
-                                  <Badge key={i} className="bg-primary/10 text-primary border-primary/20">{skill}</Badge>
-                                ))}
-                              </div>
-                            </div>
-                          </DialogContent>
-                        </Dialog>
-                      </div>
-                    </Card>
-                  </div>
-                );
-              })}
-            </div>
+          <div className="space-y-10">
+            {sortedExperiences.map((exp, index) => (
+              <TimelineItem key={index} exp={exp} index={index} />
+            ))}
           </div>
         </div>
       </div>
