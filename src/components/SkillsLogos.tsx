@@ -68,12 +68,22 @@ export const SkillsLogos = () => {
                         e.currentTarget.style.boxShadow = "";
                       }}
                     >
-                      <img
-                        src={`https://cdn.simpleicons.org/${skill.slug}/${skill.color}`}
-                        alt={skill.name}
-                        loading="lazy"
-                        className="w-10 h-10 md:w-12 md:h-12 transition-transform duration-300 group-hover:scale-110"
-                      />
+                      {skill.Icon ? (
+                        <skill.Icon
+                          className="w-10 h-10 md:w-12 md:h-12 transition-transform duration-300 group-hover:scale-110"
+                          style={{ color: `#${skill.color}` }}
+                        />
+                      ) : (
+                        <img
+                          src={`https://cdn.simpleicons.org/${skill.slug}/${skill.color}`}
+                          alt={skill.name}
+                          loading="lazy"
+                          onError={(e) => {
+                            (e.currentTarget as HTMLImageElement).src = `https://cdn.simpleicons.org/${skill.slug}`;
+                          }}
+                          className="w-10 h-10 md:w-12 md:h-12 transition-transform duration-300 group-hover:scale-110"
+                        />
+                      )}
                       <span className="absolute bottom-2 left-1/2 -translate-x-1/2 text-[10px] text-muted-foreground group-hover:text-foreground transition-colors whitespace-nowrap">
                         {skill.name}
                       </span>
