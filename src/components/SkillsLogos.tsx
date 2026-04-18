@@ -1,9 +1,11 @@
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
+import { BarChart3, LineChart, type LucideIcon } from "lucide-react";
 
 type Skill = {
   name: string;
-  slug: string; // simple-icons slug
+  slug?: string; // simple-icons slug
   color: string; // brand hex (no #)
+  Icon?: LucideIcon;
 };
 
 const groups: { category: string; skills: Skill[] }[] = [
@@ -24,8 +26,8 @@ const groups: { category: string; skills: Skill[] }[] = [
       { name: "Tableau", slug: "tableau", color: "E97627" },
       { name: "Excel", slug: "microsoftexcel", color: "217346" },
       { name: "Google Sheets", slug: "googlesheets", color: "34A853" },
-      { name: "Matplotlib", slug: "python", color: "11557C" },
-      { name: "Seaborn", slug: "python", color: "4C72B0" },
+      { name: "Matplotlib", color: "11557C", Icon: LineChart },
+      { name: "Seaborn", color: "4C72B0", Icon: BarChart3 },
     ],
   },
   {
@@ -66,12 +68,22 @@ export const SkillsLogos = () => {
                         e.currentTarget.style.boxShadow = "";
                       }}
                     >
-                      <img
-                        src={`https://cdn.simpleicons.org/${skill.slug}/${skill.color}`}
-                        alt={skill.name}
-                        loading="lazy"
-                        className="w-10 h-10 md:w-12 md:h-12 transition-transform duration-300 group-hover:scale-110"
-                      />
+                      {skill.Icon ? (
+                        <skill.Icon
+                          className="w-10 h-10 md:w-12 md:h-12 transition-transform duration-300 group-hover:scale-110"
+                          style={{ color: `#${skill.color}` }}
+                        />
+                      ) : (
+                        <img
+                          src={`https://cdn.simpleicons.org/${skill.slug}/${skill.color}`}
+                          alt={skill.name}
+                          loading="lazy"
+                          onError={(e) => {
+                            (e.currentTarget as HTMLImageElement).src = `https://cdn.simpleicons.org/${skill.slug}`;
+                          }}
+                          className="w-10 h-10 md:w-12 md:h-12 transition-transform duration-300 group-hover:scale-110"
+                        />
+                      )}
                       <span className="absolute bottom-2 left-1/2 -translate-x-1/2 text-[10px] text-muted-foreground group-hover:text-foreground transition-colors whitespace-nowrap">
                         {skill.name}
                       </span>
