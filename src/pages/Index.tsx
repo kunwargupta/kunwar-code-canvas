@@ -509,7 +509,7 @@ const Index = () => {
       {/* Contact Section */}
       <section id="contact" className="relative min-h-screen flex items-center justify-center px-4 py-16 overflow-hidden">
         <div className="absolute inset-0 animated-gradient-bg pointer-events-none" />
-        <div className="container mx-auto">
+        <div className="container mx-auto relative z-10">
           <div className="max-w-5xl mx-auto space-y-12">
             <div className="text-center space-y-4 animate-fade-in">
               <h1 className="text-4xl md:text-5xl font-bold">
