@@ -396,37 +396,49 @@ const Index = () => {
                 My <span className="text-gradient">Certifications</span>
               </h2>
               <div className="grid md:grid-cols-3 gap-6">
-                {certifications.map((cert, index) => (
-                  <Card 
-                    key={index} 
-                    className="p-6 card-hover animate-slide-up border-primary/10 hover:border-primary/30 transition-all duration-300"
-                    style={{ animationDelay: `${index * 0.15}s` }}
-                  >
-                    <div className="space-y-4">
-                      <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center">
-                        <Award size={24} className="text-primary" />
+                {certifications.map((cert, index) => {
+                  const platformStyles = [
+                    { Icon: GraduationCap, color: "#3B82F6", bg: "rgba(59,130,246,0.12)" }, // Career247 - blue
+                    { Icon: BookOpen, color: "#10B981", bg: "rgba(16,185,129,0.12)" },      // Simplilearn - green
+                    { Icon: Trophy, color: "#06B6D4", bg: "rgba(6,182,212,0.12)" },         // HackerRank - cyan
+                  ];
+                  const { Icon, color, bg } = platformStyles[index % platformStyles.length];
+
+                  return (
+                    <Card
+                      key={index}
+                      className="p-6 card-hover animate-slide-up border-primary/10 hover:border-primary/30 transition-all duration-300"
+                      style={{ animationDelay: `${index * 0.15}s` }}
+                    >
+                      <div className="space-y-4">
+                        <div
+                          className="w-12 h-12 rounded-lg flex items-center justify-center"
+                          style={{ backgroundColor: bg }}
+                        >
+                          <Icon size={24} style={{ color }} />
+                        </div>
+                        <div>
+                          <h3 className="text-lg font-semibold" style={{ color }}>{cert.title}</h3>
+                          <p className="text-sm text-muted-foreground">{cert.issuer}</p>
+                        </div>
+                        <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                          <Calendar size={14} />
+                          <span>{cert.date}</span>
+                        </div>
+                        <p className="text-sm text-muted-foreground leading-relaxed">
+                          {cert.description}
+                        </p>
+                        <div className="flex flex-wrap gap-1.5">
+                          {cert.skills.map((skill, i) => (
+                            <Badge key={i} variant="secondary" className="text-xs">
+                              {skill}
+                            </Badge>
+                          ))}
+                        </div>
                       </div>
-                      <div>
-                        <h3 className="text-lg font-semibold text-primary">{cert.title}</h3>
-                        <p className="text-sm text-muted-foreground">{cert.issuer}</p>
-                      </div>
-                      <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                        <Calendar size={14} />
-                        <span>{cert.date}</span>
-                      </div>
-                      <p className="text-sm text-muted-foreground leading-relaxed">
-                        {cert.description}
-                      </p>
-                      <div className="flex flex-wrap gap-1.5">
-                        {cert.skills.map((skill, i) => (
-                          <Badge key={i} variant="secondary" className="text-xs">
-                            {skill}
-                          </Badge>
-                        ))}
-                      </div>
-                    </div>
-                  </Card>
-                ))}
+                    </Card>
+                  );
+                })}
               </div>
             </div>
           </div>
