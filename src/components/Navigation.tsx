@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Home, User, Briefcase, Award, FileText, Mail } from "lucide-react";
+import { Home, User, Briefcase, Award, FileText, Mail, Menu, X } from "lucide-react";
 
 const navItems = [
   { id: "home", label: "Home", icon: Home },
@@ -15,6 +15,7 @@ export const Navigation = () => {
   const [activeSection, setActiveSection] = useState("home");
   const [scrolled, setScrolled] = useState(false);
   const [scrollProgress, setScrollProgress] = useState(0);
+  const [mobileOpen, setMobileOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -44,6 +45,7 @@ export const Navigation = () => {
   const scrollToSection = (id: string) => {
     const element = document.getElementById(id);
     element?.scrollIntoView({ behavior: "smooth" });
+    setMobileOpen(false);
   };
 
   return (
@@ -92,21 +94,36 @@ export const Navigation = () => {
               ))}
             </div>
 
-            <div className="md:hidden flex items-center gap-4">
-              {navItems.map(({ id, icon: Icon }) => (
+            <div className="md:hidden">
+              <button
+                onClick={() => setMobileOpen((v) => !v)}
+                aria-label="Toggle menu"
+                className="text-foreground hover:text-primary transition-colors"
+              >
+                {mobileOpen ? <X size={24} /> : <Menu size={24} />}
+              </button>
+            </div>
+          </div>
+
+          {/* Mobile dropdown */}
+          {mobileOpen && (
+            <div className="md:hidden pb-4 pt-2 space-y-1 animate-fade-in">
+              {navItems.map(({ id, label, icon: Icon }) => (
                 <button
                   key={id}
                   onClick={() => scrollToSection(id)}
-                  className={`transition-all duration-300 hover:scale-110 ${
+                  className={`w-full flex items-center gap-3 px-3 py-2 rounded-md text-sm font-medium transition-colors ${
                     activeSection === id
-                      ? "text-primary drop-shadow-[0_0_6px_hsl(var(--primary)/0.7)]"
-                      : "text-muted-foreground hover:text-primary"
+                      ? "bg-primary/10 text-primary"
+                      : "text-muted-foreground hover:bg-card hover:text-primary"
                   }`}
                 >
-                  <Icon size={20} />
+                  <Icon size={18} />
+                  {label}
                 </button>
               ))}
             </div>
+          )}
           </div>
         </div>
       </nav>

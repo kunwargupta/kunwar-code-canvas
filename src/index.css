@@ -83,12 +83,39 @@ All colors MUST be HSL.
     @apply border-border;
   }
 
+  html {
+    scroll-behavior: smooth;
+  }
+
   body {
     @apply bg-background text-foreground font-sans antialiased;
   }
 
   h1, h2, h3, h4, h5, h6 {
     @apply font-semibold tracking-tight;
+  }
+}
+
+@layer utilities {
+  .reveal {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 400ms ease-out, transform 400ms ease-out;
+  }
+  .reveal-in {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  @keyframes gradient-shift {
+    0%, 100% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+  }
+  .animated-gradient-bg {
+    background: radial-gradient(circle at 20% 30%, hsl(var(--primary) / 0.15), transparent 50%),
+                radial-gradient(circle at 80% 70%, hsl(var(--accent) / 0.12), transparent 50%);
+    background-size: 200% 200%;
+    animation: gradient-shift 12s ease infinite;
   }
 }
 
