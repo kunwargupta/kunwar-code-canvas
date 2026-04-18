@@ -226,20 +226,27 @@ const Index = () => {
               </p>
             </div>
 
-            <Card 
+            <Card
               ref={aboutCardRef}
-              className="p-8 md:p-12 tilt-card bg-card border-primary/20"
-              style={{ 
+              className="p-8 md:p-12 tilt-card bg-card/80 backdrop-blur-md border-y border-r border-primary/20 border-l-4 border-l-primary"
+              style={{
                 transform: aboutCardTransform,
-                boxShadow: aboutCardHovered 
-                  ? '0 35px 70px -15px rgba(66, 153, 225, 0.5), 0 20px 40px -10px rgba(0, 0, 0, 0.3)'
-                  : '0 10px 30px -5px rgba(0, 0, 0, 0.2)'
+                boxShadow: aboutCardHovered
+                  ? '0 35px 70px -15px hsl(var(--primary) / 0.4), 0 20px 40px -10px rgba(0, 0, 0, 0.4)'
+                  : '0 10px 30px -5px rgba(0, 0, 0, 0.3)'
               }}
             >
-              <div className="grid md:grid-cols-[200px,1fr] gap-8 items-start">
+              <div className="grid md:grid-cols-[220px,1fr] gap-8 items-start">
                 <div className="mx-auto md:mx-0">
-                  <div className="w-48 h-48 rounded-full bg-gradient-to-br from-primary/20 to-accent/20 flex items-center justify-center">
-                    <User size={80} className="text-primary" />
+                  <div className="relative group">
+                    {/* Outer glow */}
+                    <div className="absolute -inset-2 rounded-full bg-gradient-to-br from-primary/40 to-[hsl(var(--hero-gradient-end))/40] blur-xl opacity-70 group-hover:opacity-100 animate-pulse transition-opacity" />
+                    {/* Gradient border ring */}
+                    <div className="relative w-48 h-48 rounded-full p-[3px] bg-gradient-to-br from-primary to-[hsl(var(--hero-gradient-end))]">
+                      <div className="w-full h-full rounded-full bg-card flex items-center justify-center overflow-hidden">
+                        <User size={72} className="text-primary/50" />
+                      </div>
+                    </div>
                   </div>
                 </div>
 
@@ -247,15 +254,15 @@ const Index = () => {
                   <div className="space-y-4">
                     <h2 className="text-2xl font-semibold">Kunwar Ji Gupta</h2>
                     <p className="text-muted-foreground leading-relaxed">
-                      Data Analyst with hands-on experience in SQL, Python, Power BI, and Excel, focused on 
-                      data validation, exploratory data analysis (EDA), and KPI reporting across datasets of 
-                      48,000+ records. Skilled in data cleaning, preparation, and customer segmentation, with 
-                      experience building dashboards and reports that communicate findings clearly to non-technical 
-                      stakeholders. Currently interning at Convergence Inc., working on data quality metrics 
+                      Data Analyst with hands-on experience in SQL, Python, Power BI, and Excel, focused on
+                      data validation, exploratory data analysis (EDA), and KPI reporting across datasets of
+                      48,000+ records. Skilled in data cleaning, preparation, and customer segmentation, with
+                      experience building dashboards and reports that communicate findings clearly to non-technical
+                      stakeholders. Currently interning at Convergence Inc., working on data quality metrics
                       and coverage reporting.
                     </p>
                     <p className="text-muted-foreground leading-relaxed">
-                      Committed to delivering accurate, analysis-ready data and actionable insights that 
+                      Committed to delivering accurate, analysis-ready data and actionable insights that
                       support business decisions. B.Sc. graduate from S.M.D. Patel Mahavidyalaya, Lucknow, UP, India.
                     </p>
                   </div>
@@ -274,17 +281,17 @@ const Index = () => {
 
             <div className="grid md:grid-cols-3 gap-6">
               {[
-                { label: "Projects", value: "5+" },
-                { label: "Skills", value: "20+" },
-                { label: "Certificates", value: "3" },
+                { label: "Projects", value: 5, suffix: "+" },
+                { label: "Skills", value: 20, suffix: "+" },
+                { label: "Certificates", value: 3, suffix: "" },
               ].map((stat, index) => (
-                <Card 
-                  key={index} 
-                  className="p-6 text-center card-hover bg-card border-primary/20 hover:border-primary/40 transition-colors"
+                <Card
+                  key={index}
+                  className="p-6 text-center card-hover bg-card/80 backdrop-blur-md border-primary/20 hover:border-primary/40 transition-colors"
                   style={{ animationDelay: `${index * 0.1}s` }}
                 >
                   <div className="text-4xl font-bold text-gradient mb-2">
-                    {stat.value}
+                    <CountUp end={stat.value} suffix={stat.suffix} />
                   </div>
                   <div className="text-muted-foreground">{stat.label}</div>
                 </Card>
