@@ -26,8 +26,8 @@ const groups: { category: string; skills: Skill[] }[] = [
       { name: "Tableau", slug: "tableau", color: "E97627" },
       { name: "Excel", slug: "microsoftexcel", color: "217346" },
       { name: "Google Sheets", slug: "googlesheets", color: "34A853" },
-      { name: "Matplotlib", color: "11557C", LucideIcon: LineChart },
-      { name: "Seaborn", color: "4C72B0", LucideIcon: BarChart3 },
+      { name: "Matplotlib", color: "11557C", Icon: LineChart },
+      { name: "Seaborn", color: "4C72B0", Icon: BarChart3 },
     ],
   },
   {
