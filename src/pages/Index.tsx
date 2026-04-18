@@ -1,6 +1,7 @@
 import { TypeWriter } from "@/components/TypeWriter";
 import { ExperienceTimeline } from "@/components/ExperienceTimeline";
 import { SkillsLogos } from "@/components/SkillsLogos";
+import { CountUp } from "@/components/CountUp";
 import { DotGrid } from "@/components/DotGrid";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
