@@ -1,9 +1,11 @@
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
+import { BarChart3, LineChart } from "lucide-react";
 
 type Skill = {
   name: string;
-  slug: string; // simple-icons slug
+  slug?: string; // simple-icons slug
   color: string; // brand hex (no #)
+  LucideIcon?: React.ComponentType<{ size?: number; color?: string; className?: string }>;
 };
 
 const groups: { category: string; skills: Skill[] }[] = [
@@ -24,8 +26,8 @@ const groups: { category: string; skills: Skill[] }[] = [
       { name: "Tableau", slug: "tableau", color: "E97627" },
       { name: "Excel", slug: "microsoftexcel", color: "217346" },
       { name: "Google Sheets", slug: "googlesheets", color: "34A853" },
-      { name: "Matplotlib", slug: "python", color: "11557C" },
-      { name: "Seaborn", slug: "python", color: "4C72B0" },
+      { name: "Matplotlib", color: "11557C", LucideIcon: LineChart },
+      { name: "Seaborn", color: "4C72B0", LucideIcon: BarChart3 },
     ],
   },
   {
