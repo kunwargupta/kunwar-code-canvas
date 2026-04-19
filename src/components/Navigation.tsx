@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { Home, User, Briefcase, Award, FileText, Mail, Menu, X } from "lucide-react";
+import { ThemeToggle } from "./ThemeToggle";
 
 const navItems = [
   { id: "home", label: "Home", icon: Home },
@@ -59,12 +60,11 @@ export const Navigation = () => {
       </div>
 
       <nav
-        className={`fixed top-[2px] left-0 right-0 z-50 backdrop-blur-xl transition-all duration-300 ${
+        className={`fixed top-[2px] left-0 right-0 z-50 backdrop-blur-xl bg-background/80 transition-all duration-300 ${
           scrolled
-            ? "border-b border-primary/20 shadow-[0_2px_20px_hsl(var(--primary)/0.08)]"
+            ? "border-b border-primary/20 shadow-[0_2px_20px_hsl(var(--primary)/0.12)]"
             : "border-b border-transparent"
         }`}
-        style={{ backgroundColor: "hsla(222, 47%, 4%, 0.8)" }}
       >
         <div className="container mx-auto px-4">
           <div className="flex items-center justify-between h-16">
@@ -94,7 +94,12 @@ export const Navigation = () => {
               ))}
             </div>
 
-            <div className="md:hidden">
+            <div className="hidden md:flex items-center">
+              <ThemeToggle />
+            </div>
+
+            <div className="md:hidden flex items-center gap-3">
+              <ThemeToggle />
               <button
                 onClick={() => setMobileOpen((v) => !v)}
                 aria-label="Toggle menu"
