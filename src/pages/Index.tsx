@@ -12,7 +12,7 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from 
 import { ArrowRight, Github, Linkedin, Mail, Download, User, ExternalLink, Award, FileText, MapPin, Phone, Calendar, GraduationCap, BookOpen, Trophy } from "lucide-react";
 import { useState } from "react";
 import { useToast } from "@/hooks/use-toast";
-import { useTilt } from "@/hooks/use-tilt";
+
 
 const projects = [
   {
@@ -109,7 +109,7 @@ const Index = () => {
     message: "",
   });
   const { toast } = useToast();
-  const { ref: aboutCardRef, transform: aboutCardTransform, isHovered: aboutCardHovered } = useTilt();
+  
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -217,75 +217,113 @@ const Index = () => {
               </p>
             </div>
 
-            <Card
-              ref={aboutCardRef}
-              className="p-8 md:p-12 tilt-card bg-card/80 backdrop-blur-md border-y border-r border-primary/20 border-l-4 border-l-primary"
-              style={{
-                transform: aboutCardTransform,
-                boxShadow: aboutCardHovered
-                  ? '0 35px 70px -15px hsl(var(--primary) / 0.4), 0 20px 40px -10px rgba(0, 0, 0, 0.4)'
-                  : '0 10px 30px -5px rgba(0, 0, 0, 0.3)'
-              }}
-            >
-              <div className="grid md:grid-cols-[220px,1fr] gap-8 items-start">
-                <div className="mx-auto md:mx-0">
-                  <div className="relative group">
-                    {/* Outer glow */}
-                    <div className="absolute -inset-2 rounded-full bg-gradient-to-br from-primary/40 to-[hsl(var(--hero-gradient-end))/40] blur-xl opacity-70 group-hover:opacity-100 animate-pulse transition-opacity" />
-                    {/* Gradient border ring */}
-                    <div className="relative w-48 h-48 rounded-full p-[3px] bg-gradient-to-br from-primary to-[hsl(var(--hero-gradient-end))]">
-                      <div className="w-full h-full rounded-full bg-card flex items-center justify-center overflow-hidden">
-                        <User size={72} className="text-primary/50" />
+            {(() => {
+              const KEYWORD_COLORS: Record<string, string> = {
+                "Excel": "#22c55e",
+                "Python": "#eab308",
+                "SQL": "#3b82f6",
+                "Power BI": "#f59e0b",
+                "Tableau": "#06b6d4",
+                "EDA": "#a855f7",
+                "KPI": "#f97316",
+              };
+              const Keyword = ({ children, color }: { children: React.ReactNode; color?: string }) => {
+                if (!color) {
+                  // Special: Data Analyst → blue→cyan gradient
+                  return (
+                    <span className="font-semibold bg-gradient-to-r from-[#3b82f6] to-[#06b6d4] bg-clip-text text-transparent transition-all duration-200 hover:drop-shadow-[0_0_10px_rgba(59,130,246,0.6)]">
+                      {children}
+                    </span>
+                  );
+                }
+                return (
+                  <span
+                    className="font-semibold transition-all duration-200 cursor-default"
+                    style={{
+                      color,
+                      backgroundColor: `${color}1f`,
+                      borderBottom: `1px solid ${color}80`,
+                      padding: "0 4px",
+                      borderRadius: "3px",
+                    }}
+                    onMouseEnter={(e) => {
+                      e.currentTarget.style.backgroundColor = `${color}33`;
+                      e.currentTarget.style.borderBottomColor = color;
+                      e.currentTarget.style.textShadow = `0 0 12px ${color}99`;
+                    }}
+                    onMouseLeave={(e) => {
+                      e.currentTarget.style.backgroundColor = `${color}1f`;
+                      e.currentTarget.style.borderBottomColor = `${color}80`;
+                      e.currentTarget.style.textShadow = "";
+                    }}
+                  >
+                    {children}
+                  </span>
+                );
+              };
+
+              return (
+                <div className="grid md:grid-cols-[260px,1fr] gap-12 items-start">
+                  {/* Left — Profile photo, no card */}
+                  <div className="mx-auto md:mx-0">
+                    <div className="relative group">
+                      <div className="absolute -inset-3 rounded-full bg-gradient-to-br from-primary/40 to-[hsl(var(--hero-gradient-end))/40] blur-2xl opacity-70 group-hover:opacity-100 animate-pulse transition-opacity" />
+                      <div className="relative w-56 h-56 rounded-full p-[3px] bg-gradient-to-br from-primary to-[hsl(var(--hero-gradient-end))]">
+                        <div className="w-full h-full rounded-full bg-card flex items-center justify-center overflow-hidden">
+                          <User size={88} className="text-primary/50" />
+                        </div>
                       </div>
                     </div>
                   </div>
-                </div>
 
-                <div className="space-y-6">
-                  <div className="space-y-4">
-                    <h2 className="text-2xl font-semibold">Kunwar Ji Gupta</h2>
-                    <p className="text-muted-foreground leading-relaxed">
-                      Data Analyst with hands-on experience in SQL, Python, Power BI, and Excel, focused on
-                      data validation, exploratory data analysis (EDA), and KPI reporting across datasets of
-                      48,000+ records. Skilled in data cleaning, preparation, and customer segmentation, with
-                      experience building dashboards and reports that communicate findings clearly to non-technical
-                      stakeholders. Currently interning at Convergence Inc., working on data quality metrics
-                      and coverage reporting.
+                  {/* Right — Flowing text on background, no card */}
+                  <div className="space-y-6">
+                    <h2 className="text-3xl md:text-4xl font-bold">Kunwar Ji Gupta</h2>
+                    <p className="text-muted-foreground text-base md:text-lg leading-relaxed">
+                      <Keyword>Data Analyst</Keyword> with hands-on experience in{" "}
+                      <Keyword color={KEYWORD_COLORS.SQL}>SQL</Keyword>,{" "}
+                      <Keyword color={KEYWORD_COLORS.Python}>Python</Keyword>,{" "}
+                      <Keyword color={KEYWORD_COLORS["Power BI"]}>Power BI</Keyword>, and{" "}
+                      <Keyword color={KEYWORD_COLORS.Excel}>Excel</Keyword>, focused on data validation,
+                      exploratory data analysis (<Keyword color={KEYWORD_COLORS.EDA}>EDA</Keyword>), and{" "}
+                      <Keyword color={KEYWORD_COLORS.KPI}>KPI</Keyword> reporting across datasets of 48,000+
+                      records. Skilled in data cleaning, preparation, and customer segmentation, with
+                      experience building dashboards in <Keyword color={KEYWORD_COLORS.Tableau}>Tableau</Keyword>{" "}
+                      and reports that communicate findings clearly to non-technical stakeholders. Currently
+                      interning at Convergence Inc., working on data quality metrics and coverage reporting.
                     </p>
-                    <p className="text-muted-foreground leading-relaxed">
+                    <p className="text-muted-foreground text-base md:text-lg leading-relaxed">
                       Committed to delivering accurate, analysis-ready data and actionable insights that
-                      support business decisions. B.Sc. graduate from S.M.D. Patel Mahavidyalaya, Lucknow, UP, India.
+                      support business decisions. B.Sc. graduate from S.M.D. Patel Mahavidyalaya, Lucknow,
+                      UP, India.
                     </p>
-                  </div>
 
-                  <div className="pt-4">
-                    <a href="/Kunwar_Data_Analyst.pdf" download>
-                      <Button className="gap-2 glow-effect">
-                        <Download size={20} />
-                        Download Resume
-                      </Button>
-                    </a>
+                    <div className="pt-2">
+                      <a href="/Kunwar_Data_Analyst.pdf" download>
+                        <Button className="gap-2">
+                          <Download size={20} />
+                          Download Resume
+                        </Button>
+                      </a>
+                    </div>
                   </div>
                 </div>
-              </div>
-            </Card>
+              );
+            })()}
 
-            <div className="grid md:grid-cols-3 gap-6">
+            {/* Stats — no card, plain on background */}
+            <div className="grid grid-cols-3 gap-6 md:gap-12 pt-8 border-t border-border/40">
               {[
                 { label: "Projects", value: 5, suffix: "+" },
                 { label: "Skills", value: 20, suffix: "+" },
                 { label: "Certificates", value: 3, suffix: "" },
               ].map((stat, index) => (
-                <Card
-                  key={index}
-                  className="p-6 text-center card-hover bg-card/80 backdrop-blur-md border-primary/20 hover:border-primary/40 transition-colors"
-                  style={{ animationDelay: `${index * 0.1}s` }}
-                >
-                  <div className="text-4xl font-bold text-gradient mb-2">
+                <div key={index} className="text-center">
+                  <div className="text-4xl md:text-5xl font-bold text-gradient mb-2">
                     <CountUp end={stat.value} suffix={stat.suffix} />
                   </div>
-                  <div className="text-muted-foreground">{stat.label}</div>
-                </Card>
+                  <div className="text-sm md:text-base text-muted-foreground">{stat.label}</div>
+                </div>
               ))}
             </div>
           </div>
