@@ -542,10 +542,7 @@ const Index = () => {
                     />
                   </div>
 
-                  <Button
-                    type="submit"
-                    className="w-full gap-2 bg-gradient-to-r from-primary to-[hsl(var(--hero-gradient-end))] text-primary-foreground hover:opacity-90 hover:scale-[1.02] shadow-[0_0_20px_hsl(var(--primary)/0.3)] transition-all duration-300"
-                  >
+                  <Button type="submit" className="w-full gap-2">
                     Send Message
                   </Button>
                 </form>
