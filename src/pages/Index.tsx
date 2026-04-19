@@ -153,19 +153,10 @@ const Index = () => {
               </p>
 
               <div className="flex flex-wrap gap-4 justify-center md:justify-start items-center">
-                <Button
-                  size="lg"
-                  className="gap-2 bg-gradient-to-r from-primary to-[hsl(var(--hero-gradient-end))] text-primary-foreground hover:opacity-90 shadow-[0_0_20px_hsl(var(--primary)/0.3)] transition-all duration-300"
-                  onClick={() => scrollToSection('projects')}
-                >
+                <Button size="lg" className="gap-2" onClick={() => scrollToSection('projects')}>
                   View My Work <ArrowRight size={20} />
                 </Button>
-                <Button
-                  size="lg"
-                  variant="outline"
-                  className="gap-2 border-primary/50 text-primary hover:bg-primary/10 hover:border-primary"
-                  onClick={() => scrollToSection('contact')}
-                >
+                <Button size="lg" variant="outline" className="gap-2" onClick={() => scrollToSection('contact')}>
                   Get in Touch
                 </Button>
               </div>
@@ -319,9 +310,6 @@ const Index = () => {
 
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
               {projects.map((project, index) => {
-                const getTechColor = (_tech: string) =>
-                  "bg-primary/10 text-primary border-primary/30";
-
                 return (
                   <Card
                     key={index}
@@ -346,10 +334,7 @@ const Index = () => {
                       </p>
                       <div className="flex flex-wrap gap-2">
                         {project.tech.map((tech, i) => (
-                          <span
-                            key={i}
-                            className={`text-xs px-2.5 py-1 rounded-full border font-medium ${getTechColor(tech)}`}
-                          >
+                          <span key={i} className="chip">
                             {tech}
                           </span>
                         ))}
@@ -431,9 +416,9 @@ const Index = () => {
                         </p>
                         <div className="flex flex-wrap gap-1.5">
                           {cert.skills.map((skill, i) => (
-                            <Badge key={i} variant="secondary" className="text-xs">
+                            <span key={i} className="chip">
                               {skill}
-                            </Badge>
+                            </span>
                           ))}
                         </div>
                       </div>
@@ -557,10 +542,7 @@ const Index = () => {
                     />
                   </div>
 
-                  <Button
-                    type="submit"
-                    className="w-full gap-2 bg-gradient-to-r from-primary to-[hsl(var(--hero-gradient-end))] text-primary-foreground hover:opacity-90 hover:scale-[1.02] shadow-[0_0_20px_hsl(var(--primary)/0.3)] transition-all duration-300"
-                  >
+                  <Button type="submit" className="w-full gap-2">
                     Send Message
                   </Button>
                 </form>

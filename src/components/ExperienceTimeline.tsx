@@ -86,12 +86,9 @@ const TimelineItem = ({ exp, index }: { exp: Experience; index: number }) => {
 
           <div className="flex flex-wrap gap-1.5">
             {exp.skills.map((skill, i) => (
-              <Badge
-                key={i}
-                className="text-xs bg-transparent text-primary border border-primary/40 rounded-full px-2.5 py-0.5 hover:bg-primary/10 hover:border-primary hover:shadow-[0_0_10px_hsl(var(--primary)/0.4)] transition-all"
-              >
+              <span key={i} className="chip">
                 {skill}
-              </Badge>
+              </span>
             ))}
           </div>
 
@@ -128,9 +125,9 @@ const TimelineItem = ({ exp, index }: { exp: Experience; index: number }) => {
                 </div>
                 <div className="flex flex-wrap gap-2 pt-2 border-t border-border">
                   {exp.skills.map((skill, i) => (
-                    <Badge key={i} className="bg-primary/10 text-primary border-primary/20">
+                    <span key={i} className="chip">
                       {skill}
-                    </Badge>
+                    </span>
                   ))}
                 </div>
               </div>
