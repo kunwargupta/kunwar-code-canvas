@@ -319,15 +319,8 @@ const Index = () => {
 
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
               {projects.map((project, index) => {
-                const getTechColor = (tech: string) => {
-                  const t = tech.toLowerCase();
-                  if (t.includes("sql") || t.includes("mysql")) return "bg-blue-500/15 text-blue-400 border-blue-500/30";
-                  if (t.includes("python") || t.includes("pandas") || t.includes("numpy") || t.includes("matplotlib") || t.includes("seaborn")) return "bg-cyan-500/15 text-cyan-400 border-cyan-500/30";
-                  if (t.includes("excel") || t.includes("sheets")) return "bg-emerald-500/15 text-emerald-400 border-emerald-500/30";
-                  if (t.includes("power bi") || t.includes("powerbi")) return "bg-purple-500/15 text-purple-400 border-purple-500/30";
-                  if (t.includes("tableau")) return "bg-orange-500/15 text-orange-400 border-orange-500/30";
-                  return "bg-primary/10 text-primary border-primary/30";
-                };
+                const getTechColor = (_tech: string) =>
+                  "bg-primary/10 text-primary border-primary/30";
 
                 return (
                   <Card
@@ -406,9 +399,9 @@ const Index = () => {
               <div className="grid md:grid-cols-3 gap-6">
                 {certifications.map((cert, index) => {
                   const platformStyles = [
-                    { Icon: GraduationCap, color: "#3B82F6", bg: "rgba(59,130,246,0.12)" }, // Career247 - blue
-                    { Icon: BookOpen, color: "#10B981", bg: "rgba(16,185,129,0.12)" },      // Simplilearn - green
-                    { Icon: Trophy, color: "#06B6D4", bg: "rgba(6,182,212,0.12)" },         // HackerRank - cyan
+                    { Icon: GraduationCap, color: "#10B981", bg: "rgba(16,185,129,0.14)" }, // Career247
+                    { Icon: BookOpen, color: "#34D399", bg: "rgba(52,211,153,0.14)" },      // Simplilearn
+                    { Icon: Trophy, color: "#059669", bg: "rgba(5,150,105,0.14)" },         // HackerRank
                   ];
                   const { Icon, color, bg } = platformStyles[index % platformStyles.length];
 
