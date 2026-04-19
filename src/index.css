@@ -178,6 +178,27 @@
     position: relative;
     z-index: 1;
   }
+
+  /* Tech tag / chip — themed for both light & dark */
+  .chip {
+    @apply inline-flex items-center text-xs font-medium px-2.5 py-1 rounded-full border transition-all duration-300;
+    background-color: #ecfdf5;
+    border-color: hsl(160 84% 39% / 0.5);
+    color: #065f46;
+  }
+  .chip:hover {
+    border-color: hsl(160 84% 39%);
+    box-shadow: 0 0 12px hsl(160 84% 39% / 0.35);
+  }
+  .dark .chip {
+    background-color: #0d1f17;
+    border-color: hsl(160 84% 39% / 0.4);
+    color: #34d399;
+  }
+  .dark .chip:hover {
+    border-color: hsl(160 84% 39%);
+    box-shadow: 0 0 14px hsl(160 84% 39% / 0.45);
+  }
 }
 
 @keyframes fadeIn {

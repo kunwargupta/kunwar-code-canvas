@@ -319,9 +319,6 @@ const Index = () => {
 
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
               {projects.map((project, index) => {
-                const getTechColor = (_tech: string) =>
-                  "bg-primary/10 text-primary border-primary/30";
-
                 return (
                   <Card
                     key={index}
@@ -346,10 +343,7 @@ const Index = () => {
                       </p>
                       <div className="flex flex-wrap gap-2">
                         {project.tech.map((tech, i) => (
-                          <span
-                            key={i}
-                            className={`text-xs px-2.5 py-1 rounded-full border font-medium ${getTechColor(tech)}`}
-                          >
+                          <span key={i} className="chip">
                             {tech}
                           </span>
                         ))}
