@@ -109,7 +109,7 @@ const Index = () => {
     message: "",
   });
   const { toast } = useToast();
-  const { ref: aboutCardRef, transform: aboutCardTransform, isHovered: aboutCardHovered } = useTilt();
+  
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
