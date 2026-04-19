@@ -416,9 +416,9 @@ const Index = () => {
                         </p>
                         <div className="flex flex-wrap gap-1.5">
                           {cert.skills.map((skill, i) => (
-                            <Badge key={i} variant="secondary" className="text-xs">
+                            <span key={i} className="chip">
                               {skill}
-                            </Badge>
+                            </span>
                           ))}
                         </div>
                       </div>
