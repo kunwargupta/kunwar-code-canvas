@@ -153,19 +153,10 @@ const Index = () => {
               </p>
 
               <div className="flex flex-wrap gap-4 justify-center md:justify-start items-center">
-                <Button
-                  size="lg"
-                  className="gap-2 bg-gradient-to-r from-primary to-[hsl(var(--hero-gradient-end))] text-primary-foreground hover:opacity-90 shadow-[0_0_20px_hsl(var(--primary)/0.3)] transition-all duration-300"
-                  onClick={() => scrollToSection('projects')}
-                >
+                <Button size="lg" className="gap-2" onClick={() => scrollToSection('projects')}>
                   View My Work <ArrowRight size={20} />
                 </Button>
-                <Button
-                  size="lg"
-                  variant="outline"
-                  className="gap-2 border-primary/50 text-primary hover:bg-primary/10 hover:border-primary"
-                  onClick={() => scrollToSection('contact')}
-                >
+                <Button size="lg" variant="outline" className="gap-2" onClick={() => scrollToSection('contact')}>
                   Get in Touch
                 </Button>
               </div>
