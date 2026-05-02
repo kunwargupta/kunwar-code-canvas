@@ -170,7 +170,7 @@ export const ExperienceTimeline = () => {
 
         <div className="relative">
           {/* Glowing vertical line */}
-          <div className="absolute left-8 top-0 bottom-0 w-[2px] bg-gradient-to-b from-primary via-primary/60 to-primary/20 shadow-[0_0_12px_hsl(var(--primary)/0.6)] rounded-full" />
+          <div className="absolute left-[85px] md:left-[141px] top-0 bottom-0 w-[2px] bg-gradient-to-b from-primary via-primary/60 to-primary/20 shadow-[0_0_12px_hsl(var(--primary)/0.6)] rounded-full" />
 
           <div className="space-y-10">
             {sortedExperiences.map((exp, index) => (
