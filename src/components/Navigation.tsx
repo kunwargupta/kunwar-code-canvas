@@ -19,11 +19,15 @@ export const Navigation = () => {
   const [mobileOpen, setMobileOpen] = useState(false);
 
   useEffect(() => {
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 80);
+    let rafId = 0;
+    let target = 0;
+    let current = 0;
 
+    const computeTarget = () => {
       const docHeight = document.documentElement.scrollHeight - window.innerHeight;
-      setScrollProgress(docHeight > 0 ? Math.min(window.scrollY / docHeight, 1) : 0);
+      target = docHeight > 0 ? Math.min(Math.max(window.scrollY / docHeight, 0), 1) : 0;
+
+      setScrolled(window.scrollY > 80);
 
       const sections = navItems.map((item) => item.id);
       const currentSection = sections.find((section) => {
@@ -37,9 +41,27 @@ export const Navigation = () => {
       if (currentSection) setActiveSection(currentSection);
     };
 
-    handleScroll();
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    return () => window.removeEventListener("scroll", handleScroll);
+    const tick = () => {
+      // Lerp toward target for smooth motion
+      current += (target - current) * 0.18;
+      if (Math.abs(target - current) < 0.0005) current = target;
+      setScrollProgress(current);
+      rafId = requestAnimationFrame(tick);
+    };
+
+    const onScroll = () => computeTarget();
+
+    computeTarget();
+    current = target;
+    setScrollProgress(target);
+    rafId = requestAnimationFrame(tick);
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", onScroll);
+    return () => {
+      cancelAnimationFrame(rafId);
+      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("resize", onScroll);
+    };
   }, []);
 
   const scrollToSection = (id: string) => {
