@@ -205,7 +205,7 @@ const Index = () => {
       </section>
 
       {/* About Section */}
-      <section id="about" className="min-h-screen flex items-center justify-center px-4 py-16">
+      <section id="about" className="px-4 pt-20 pb-10 scroll-mt-24">
         <div className="container mx-auto">
           <div className="max-w-4xl mx-auto space-y-12 animate-fade-in">
             <div className="text-center space-y-4">
@@ -334,7 +334,7 @@ const Index = () => {
       <ExperienceTimeline />
 
       {/* Projects Section */}
-      <section id="projects" className="min-h-screen flex items-center justify-center px-4 py-16">
+      <section id="projects" className="px-4 py-10 scroll-mt-24">
         <div className="container mx-auto">
           <div className="max-w-6xl mx-auto space-y-12">
             <div className="text-center space-y-4 animate-fade-in">
@@ -400,7 +400,7 @@ const Index = () => {
       </section>
 
       {/* Skills Section */}
-      <section id="skills" className="min-h-screen flex items-center justify-center px-4 py-16">
+      <section id="skills" className="px-4 py-10 scroll-mt-24">
         <div className="container mx-auto">
           <div className="max-w-5xl mx-auto space-y-12">
             <div className="text-center space-y-4 animate-fade-in">
@@ -470,7 +470,7 @@ const Index = () => {
       </section>
 
       {/* Resume Section */}
-      <section id="resume" className="min-h-screen flex items-center justify-center px-4 py-16">
+      <section id="resume" className="px-4 py-10 scroll-mt-24">
         <div className="container mx-auto">
           <div className="max-w-4xl mx-auto space-y-12 animate-fade-in">
             <div className="text-center space-y-4">
@@ -499,7 +499,7 @@ const Index = () => {
       </section>
 
       {/* Contact Section */}
-      <section id="contact" className="relative min-h-screen flex items-center justify-center px-4 py-16 overflow-hidden">
+      <section id="contact" className="relative px-4 py-10 overflow-hidden scroll-mt-24">
         <div className="absolute inset-0 animated-gradient-bg pointer-events-none" />
         <div className="container mx-auto relative z-10">
           <div className="max-w-5xl mx-auto space-y-12">

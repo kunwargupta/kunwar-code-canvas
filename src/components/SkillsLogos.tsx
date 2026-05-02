@@ -1,8 +1,12 @@
 import { BarChart3, LineChart, type LucideIcon } from "lucide-react";
+import excelIcon from "@/assets/skill-icons/excel.svg";
+import powerbiIcon from "@/assets/skill-icons/powerbi.svg";
+import tableauIcon from "@/assets/skill-icons/tableau.png";
 
 type Skill = {
   name: string;
   slug?: string; // simple-icons slug
+  src?: string;  // local asset (overrides slug)
   color: string; // brand hex (no #)
   Icon?: LucideIcon;
 };
@@ -21,9 +25,9 @@ const groups: { category: string; skills: Skill[] }[] = [
   {
     category: "BI & Visualization",
     skills: [
-      { name: "Power BI", slug: "powerbi", color: "F2C811" },
-      { name: "Tableau", slug: "tableau", color: "E97627" },
-      { name: "Excel", slug: "microsoftexcel", color: "217346" },
+      { name: "Power BI", src: powerbiIcon, color: "F2C811" },
+      { name: "Tableau", src: tableauIcon, color: "E97627" },
+      { name: "Excel", src: excelIcon, color: "217346" },
       { name: "Google Sheets", slug: "googlesheets", color: "34A853" },
       { name: "Matplotlib", color: "11557C", Icon: LineChart },
       { name: "Seaborn", color: "4C72B0", Icon: BarChart3 },
@@ -33,7 +37,7 @@ const groups: { category: string; skills: Skill[] }[] = [
     category: "Workflow & Tools",
     skills: [
       { name: "Git", slug: "git", color: "F05032" },
-      { name: "GitHub", slug: "github", color: "ffffff" },
+      { name: "GitHub", slug: "github", color: "8b949e" },
     ],
   },
 ];
@@ -68,6 +72,13 @@ export const SkillsLogos = () => {
                     <skill.Icon
                       className="w-14 h-14"
                       style={{ color: `#${skill.color}` }}
+                    />
+                  ) : skill.src ? (
+                    <img
+                      src={skill.src}
+                      alt={skill.name}
+                      loading="lazy"
+                      className="w-14 h-14 object-contain"
                     />
                   ) : (
                     <img

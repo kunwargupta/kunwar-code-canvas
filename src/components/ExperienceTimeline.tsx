@@ -157,7 +157,7 @@ const TimelineItem = ({ exp, index }: { exp: Experience; index: number }) => {
 
 export const ExperienceTimeline = () => {
   return (
-    <section id="experience" className="py-24 px-4">
+    <section id="experience" className="py-10 px-4 scroll-mt-24">
       <div className="container mx-auto max-w-4xl">
         <div className="text-center space-y-4 mb-16 animate-fade-in">
           <h1 className="text-4xl md:text-5xl font-bold">
