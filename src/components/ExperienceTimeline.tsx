@@ -50,16 +50,32 @@ const TimelineItem = ({ exp, index }: { exp: Experience; index: number }) => {
     return () => obs.disconnect();
   }, []);
 
+  // Split "April 2026 – Present" into start date + present flag
+  const [startDate, endPart] = exp.date.split(/\s*[–-]\s*/);
+  const isCurrent = /present/i.test(endPart ?? "");
+
   return (
     <div
       ref={ref}
-      className={`relative pl-20 transition-all duration-700 ease-out ${
+      className={`relative pl-28 md:pl-44 transition-all duration-700 ease-out ${
         visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
       }`}
       style={{ transitionDelay: `${index * 120}ms` }}
     >
+      {/* Date on the LEFT of the dot */}
+      <div className="absolute left-0 top-5 w-[72px] md:w-32 pr-3 text-right">
+        <div className="text-[13px] font-medium text-[#64748b] leading-tight">
+          {startDate}
+        </div>
+        {isCurrent && (
+          <span className="inline-block mt-1 px-2 py-0.5 rounded-full text-[10px] font-semibold tracking-wide uppercase bg-[#22c55e]/15 text-[#22c55e] border border-[#22c55e]/40">
+            Present
+          </span>
+        )}
+      </div>
+
       {/* Dot on the line */}
-      <div className="absolute left-[26px] top-6 w-4 h-4 rounded-full bg-primary border-4 border-background shadow-[0_0_16px_hsl(var(--primary)/0.8)] z-10" />
+      <div className="absolute left-[78px] md:left-[134px] top-6 w-4 h-4 rounded-full bg-primary border-4 border-background shadow-[0_0_16px_hsl(var(--primary)/0.8)] z-10" />
 
       <Card className="p-6 bg-card/80 backdrop-blur-md border-l-4 border-l-primary border-y border-r border-primary/20 hover:border-primary/50 hover:shadow-[0_10px_40px_-10px_hsl(var(--primary)/0.4)] transition-all duration-300">
         <div className="space-y-3">
@@ -154,7 +170,7 @@ export const ExperienceTimeline = () => {
 
         <div className="relative">
           {/* Glowing vertical line */}
-          <div className="absolute left-8 top-0 bottom-0 w-[2px] bg-gradient-to-b from-primary via-primary/60 to-primary/20 shadow-[0_0_12px_hsl(var(--primary)/0.6)] rounded-full" />
+          <div className="absolute left-[85px] md:left-[141px] top-0 bottom-0 w-[2px] bg-gradient-to-b from-primary via-primary/60 to-primary/20 shadow-[0_0_12px_hsl(var(--primary)/0.6)] rounded-full" />
 
           <div className="space-y-10">
             {sortedExperiences.map((exp, index) => (
