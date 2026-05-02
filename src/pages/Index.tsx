@@ -482,42 +482,18 @@ const Index = () => {
               </p>
             </div>
 
-            <Card className="p-8 card-hover bg-card border-primary/20 hover:border-primary/40 transition-colors">
-              <div className="space-y-6">
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center gap-3">
-                    <FileText size={24} className="text-primary" />
-                    <div>
-                      <h3 className="font-semibold">Kunwar_Data_Analyst.pdf</h3>
-                      <p className="text-sm text-muted-foreground">Last updated: April 2026</p>
-                    </div>
-                  </div>
-                  <a href="/Kunwar_Data_Analyst.pdf" download>
-                    <Button className="gap-2 glow-effect">
-                      <Download size={20} />
-                      Download
-                    </Button>
-                  </a>
-                </div>
-
-                <div className="border border-primary/20 rounded-lg bg-card overflow-hidden">
-                  <iframe 
-                    src="/Kunwar_Data_Analyst.pdf" 
-                    className="w-full h-[700px]"
-                    title="Resume Preview"
-                  />
-                </div>
-
-                <div className="text-center">
-                  <a href="/Kunwar_Data_Analyst.pdf" download>
-                    <Button variant="outline" className="gap-2">
-                      <Download size={20} />
-                      Download PDF
-                    </Button>
-                  </a>
-                </div>
+            <div className="flex flex-col items-center gap-4 pt-4">
+              <div className="flex items-center gap-3 text-muted-foreground">
+                <FileText size={20} className="text-primary" />
+                <span className="text-sm">Kunwar_Data_Analyst.pdf · Updated April 2026</span>
               </div>
-            </Card>
+              <a href="/Kunwar_Data_Analyst.pdf" download>
+                <Button size="lg" className="gap-2 glow-effect">
+                  <Download size={20} />
+                  Download Resume
+                </Button>
+              </a>
+            </div>
           </div>
         </div>
       </section>
