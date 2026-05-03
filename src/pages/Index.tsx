@@ -12,6 +12,7 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from 
 import { ArrowRight, Github, Linkedin, Mail, Download, User, ExternalLink, Award, FileText, MapPin, Phone, Calendar, GraduationCap, BookOpen, Trophy } from "lucide-react";
 import { useState } from "react";
 import { useToast } from "@/hooks/use-toast";
+import profilePhoto from "@/assets/profile.jpg";
 
 
 const projects = [
@@ -195,7 +196,7 @@ const Index = () => {
                 {/* Border ring */}
                 <div className="relative w-64 h-64 md:w-72 md:h-72 rounded-full p-[3px] bg-gradient-to-br from-primary to-[hsl(var(--hero-gradient-end))]">
                   <div className="w-full h-full rounded-full bg-card flex items-center justify-center overflow-hidden">
-                    <User size={96} className="text-primary/40" />
+                    <img src={profilePhoto} alt="Kunwar Ji Gupta" className="w-full h-full object-cover" />
                   </div>
                 </div>
               </div>
@@ -270,7 +271,7 @@ const Index = () => {
                       <div className="absolute -inset-3 rounded-full bg-gradient-to-br from-primary/40 to-[hsl(var(--hero-gradient-end))/40] blur-2xl opacity-70 group-hover:opacity-100 animate-pulse transition-opacity" />
                       <div className="relative w-56 h-56 rounded-full p-[3px] bg-gradient-to-br from-primary to-[hsl(var(--hero-gradient-end))]">
                         <div className="w-full h-full rounded-full bg-card flex items-center justify-center overflow-hidden">
-                          <User size={88} className="text-primary/50" />
+                          <img src={profilePhoto} alt="Kunwar Ji Gupta" className="w-full h-full object-cover" />
                         </div>
                       </div>
                     </div>
